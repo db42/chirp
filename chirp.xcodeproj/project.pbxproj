@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
+		3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BE183352E70011D02B /* CoreGraphics.framework */; };
+		3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
+		3A16F9C7183352E70011D02B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9C5183352E70011D02B /* InfoPlist.strings */; };
+		3A16F9C9183352E70011D02B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9C8183352E70011D02B /* main.m */; };
+		3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9CC183352E70011D02B /* AppDelegate.m */; };
+		3A16F9D0183352E70011D02B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9CE183352E70011D02B /* Main.storyboard */; };
+		3A16F9D3183352E70011D02B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9D2183352E70011D02B /* ViewController.m */; };
+		3A16F9D5183352E70011D02B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9D4183352E70011D02B /* Images.xcassets */; };
+		3A16F9DC183352E70011D02B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9DB183352E70011D02B /* XCTest.framework */; };
+		3A16F9DD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
+		3A16F9DE183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
+		3A16F9E6183352E70011D02B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9E4183352E70011D02B /* InfoPlist.strings */; };
+		3A16F9E8183352E70011D02B /* chirpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9E7183352E70011D02B /* chirpTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A16F9DF183352E70011D02B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A16F9B1183352E70011D02B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A16F9B8183352E70011D02B;
+			remoteInfo = chirp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3A16F9B9183352E70011D02B /* chirp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A16F9BC183352E70011D02B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3A16F9BE183352E70011D02B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3A16F9C0183352E70011D02B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3A16F9C4183352E70011D02B /* chirp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "chirp-Info.plist"; sourceTree = "<group>"; };
+		3A16F9C6183352E70011D02B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A16F9C8183352E70011D02B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A16F9CA183352E70011D02B /* chirp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirp-Prefix.pch"; sourceTree = "<group>"; };
+		3A16F9CB183352E70011D02B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A16F9CC183352E70011D02B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A16F9CF183352E70011D02B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3A16F9D1183352E70011D02B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3A16F9D2183352E70011D02B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3A16F9D4183352E70011D02B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3A16F9DA183352E70011D02B /* chirpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A16F9DB183352E70011D02B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3A16F9E3183352E70011D02B /* chirpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "chirpTests-Info.plist"; sourceTree = "<group>"; };
+		3A16F9E5183352E70011D02B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A16F9E7183352E70011D02B /* chirpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A16F9B6183352E70011D02B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */,
+				3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */,
+				3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A16F9D7183352E70011D02B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9DC183352E70011D02B /* XCTest.framework in Frameworks */,
+				3A16F9DE183352E70011D02B /* UIKit.framework in Frameworks */,
+				3A16F9DD183352E70011D02B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A16F9B0183352E70011D02B = {
+			isa = PBXGroup;
+			children = (
+				3A16F9C2183352E70011D02B /* chirp */,
+				3A16F9E1183352E70011D02B /* chirpTests */,
+				3A16F9BB183352E70011D02B /* Frameworks */,
+				3A16F9BA183352E70011D02B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A16F9BA183352E70011D02B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9B9183352E70011D02B /* chirp.app */,
+				3A16F9DA183352E70011D02B /* chirpTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A16F9BB183352E70011D02B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9BC183352E70011D02B /* Foundation.framework */,
+				3A16F9BE183352E70011D02B /* CoreGraphics.framework */,
+				3A16F9C0183352E70011D02B /* UIKit.framework */,
+				3A16F9DB183352E70011D02B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A16F9C2183352E70011D02B /* chirp */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9CB183352E70011D02B /* AppDelegate.h */,
+				3A16F9CC183352E70011D02B /* AppDelegate.m */,
+				3A16F9CE183352E70011D02B /* Main.storyboard */,
+				3A16F9D1183352E70011D02B /* ViewController.h */,
+				3A16F9D2183352E70011D02B /* ViewController.m */,
+				3A16F9D4183352E70011D02B /* Images.xcassets */,
+				3A16F9C3183352E70011D02B /* Supporting Files */,
+			);
+			path = chirp;
+			sourceTree = "<group>";
+		};
+		3A16F9C3183352E70011D02B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9C4183352E70011D02B /* chirp-Info.plist */,
+				3A16F9C5183352E70011D02B /* InfoPlist.strings */,
+				3A16F9C8183352E70011D02B /* main.m */,
+				3A16F9CA183352E70011D02B /* chirp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A16F9E1183352E70011D02B /* chirpTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9E7183352E70011D02B /* chirpTests.m */,
+				3A16F9E2183352E70011D02B /* Supporting Files */,
+			);
+			path = chirpTests;
+			sourceTree = "<group>";
+		};
+		3A16F9E2183352E70011D02B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A16F9E3183352E70011D02B /* chirpTests-Info.plist */,
+				3A16F9E4183352E70011D02B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A16F9B8183352E70011D02B /* chirp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A16F9EB183352E70011D02B /* Build configuration list for PBXNativeTarget "chirp" */;
+			buildPhases = (
+				3A16F9B5183352E70011D02B /* Sources */,
+				3A16F9B6183352E70011D02B /* Frameworks */,
+				3A16F9B7183352E70011D02B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = chirp;
+			productName = chirp;
+			productReference = 3A16F9B9183352E70011D02B /* chirp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3A16F9D9183352E70011D02B /* chirpTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A16F9EE183352E70011D02B /* Build configuration list for PBXNativeTarget "chirpTests" */;
+			buildPhases = (
+				3A16F9D6183352E70011D02B /* Sources */,
+				3A16F9D7183352E70011D02B /* Frameworks */,
+				3A16F9D8183352E70011D02B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A16F9E0183352E70011D02B /* PBXTargetDependency */,
+			);
+			name = chirpTests;
+			productName = chirpTests;
+			productReference = 3A16F9DA183352E70011D02B /* chirpTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A16F9B1183352E70011D02B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Dushyant Bansal";
+				TargetAttributes = {
+					3A16F9D9183352E70011D02B = {
+						TestTargetID = 3A16F9B8183352E70011D02B;
+					};
+				};
+			};
+			buildConfigurationList = 3A16F9B4183352E70011D02B /* Build configuration list for PBXProject "chirp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A16F9B0183352E70011D02B;
+			productRefGroup = 3A16F9BA183352E70011D02B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A16F9B8183352E70011D02B /* chirp */,
+				3A16F9D9183352E70011D02B /* chirpTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A16F9B7183352E70011D02B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9D5183352E70011D02B /* Images.xcassets in Resources */,
+				3A16F9C7183352E70011D02B /* InfoPlist.strings in Resources */,
+				3A16F9D0183352E70011D02B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A16F9D8183352E70011D02B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9E6183352E70011D02B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A16F9B5183352E70011D02B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9D3183352E70011D02B /* ViewController.m in Sources */,
+				3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */,
+				3A16F9C9183352E70011D02B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A16F9D6183352E70011D02B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A16F9E8183352E70011D02B /* chirpTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3A16F9E0183352E70011D02B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A16F9B8183352E70011D02B /* chirp */;
+			targetProxy = 3A16F9DF183352E70011D02B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3A16F9C5183352E70011D02B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A16F9C6183352E70011D02B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A16F9CE183352E70011D02B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A16F9CF183352E70011D02B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3A16F9E4183352E70011D02B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A16F9E5183352E70011D02B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A16F9E9183352E70011D02B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3A16F9EA183352E70011D02B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A16F9EC183352E70011D02B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "chirp/chirp-Prefix.pch";
+				INFOPLIST_FILE = "chirp/chirp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3A16F9ED183352E70011D02B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "chirp/chirp-Prefix.pch";
+				INFOPLIST_FILE = "chirp/chirp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		3A16F9EF183352E70011D02B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/chirp.app/chirp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "chirp/chirp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "chirpTests/chirpTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		3A16F9F0183352E70011D02B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/chirp.app/chirp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "chirp/chirp-Prefix.pch";
+				INFOPLIST_FILE = "chirpTests/chirpTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A16F9B4183352E70011D02B /* Build configuration list for PBXProject "chirp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A16F9E9183352E70011D02B /* Debug */,
+				3A16F9EA183352E70011D02B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A16F9EB183352E70011D02B /* Build configuration list for PBXNativeTarget "chirp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A16F9EC183352E70011D02B /* Debug */,
+				3A16F9ED183352E70011D02B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3A16F9EE183352E70011D02B /* Build configuration list for PBXNativeTarget "chirpTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A16F9EF183352E70011D02B /* Debug */,
+				3A16F9F0183352E70011D02B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A16F9B1183352E70011D02B /* Project object */;
+}
