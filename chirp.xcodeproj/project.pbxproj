@@ -14,13 +14,21 @@
 		3A16F9C9183352E70011D02B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9C8183352E70011D02B /* main.m */; };
 		3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9CC183352E70011D02B /* AppDelegate.m */; };
 		3A16F9D0183352E70011D02B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9CE183352E70011D02B /* Main.storyboard */; };
-		3A16F9D3183352E70011D02B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9D2183352E70011D02B /* ViewController.m */; };
 		3A16F9D5183352E70011D02B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9D4183352E70011D02B /* Images.xcassets */; };
 		3A16F9DC183352E70011D02B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9DB183352E70011D02B /* XCTest.framework */; };
 		3A16F9DD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
 		3A16F9DE183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
 		3A16F9E6183352E70011D02B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9E4183352E70011D02B /* InfoPlist.strings */; };
 		3A16F9E8183352E70011D02B /* chirpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9E7183352E70011D02B /* chirpTests.m */; };
+		3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */; };
+		3A16F9F518339E630011D02B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F418339E630011D02B /* Twitter.framework */; };
+		3A16F9F71833A0C10011D02B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F61833A0C10011D02B /* Social.framework */; };
+		3A16F9F91833A2E40011D02B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F81833A2E40011D02B /* Accounts.framework */; };
+		3AB3182A1833CF2C00C605CD /* chirp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */; };
+		3AB318391833D1C200C605CD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318381833D1C200C605CD /* User.m */; };
+		3AB3183C1833D1C200C605CD /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3183B1833D1C200C605CD /* Tweet.m */; };
+		3AB318421834950C00C605CD /* Tweet+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318411834950C00C605CD /* Tweet+Create.m */; };
+		3AB318451834966000C605CD /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318441834966000C605CD /* User+Create.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +53,26 @@
 		3A16F9CB183352E70011D02B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A16F9CC183352E70011D02B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3A16F9CF183352E70011D02B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3A16F9D1183352E70011D02B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A16F9D2183352E70011D02B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3A16F9D4183352E70011D02B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A16F9DA183352E70011D02B /* chirpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A16F9DB183352E70011D02B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3A16F9E3183352E70011D02B /* chirpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "chirpTests-Info.plist"; sourceTree = "<group>"; };
 		3A16F9E5183352E70011D02B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A16F9E7183352E70011D02B /* chirpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpTests.m; sourceTree = "<group>"; };
+		3A16F9F118339C700011D02B /* TweetFetchDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetFetchDemoVC.h; sourceTree = "<group>"; };
+		3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetFetchDemoVC.m; sourceTree = "<group>"; };
+		3A16F9F418339E630011D02B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		3A16F9F61833A0C10011D02B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		3A16F9F81833A2E40011D02B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		3AB318291833CF2C00C605CD /* chirp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = chirp.xcdatamodel; sourceTree = "<group>"; };
+		3AB318371833D1C200C605CD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3AB318381833D1C200C605CD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3AB3183A1833D1C200C605CD /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		3AB3183B1833D1C200C605CD /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		3AB318401834950C00C605CD /* Tweet+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Tweet+Create.h"; path = "../Tweet+Create.h"; sourceTree = "<group>"; };
+		3AB318411834950C00C605CD /* Tweet+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Tweet+Create.m"; path = "../Tweet+Create.m"; sourceTree = "<group>"; };
+		3AB318431834966000C605CD /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
+		3AB318441834966000C605CD /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A16F9F91833A2E40011D02B /* Accounts.framework in Frameworks */,
+				3A16F9F71833A0C10011D02B /* Social.framework in Frameworks */,
+				3A16F9F518339E630011D02B /* Twitter.framework in Frameworks */,
 				3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */,
 				3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */,
 				3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */,
@@ -101,6 +124,9 @@
 		3A16F9BB183352E70011D02B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A16F9F81833A2E40011D02B /* Accounts.framework */,
+				3A16F9F61833A0C10011D02B /* Social.framework */,
+				3A16F9F418339E630011D02B /* Twitter.framework */,
 				3A16F9BC183352E70011D02B /* Foundation.framework */,
 				3A16F9BE183352E70011D02B /* CoreGraphics.framework */,
 				3A16F9C0183352E70011D02B /* UIKit.framework */,
@@ -112,11 +138,20 @@
 		3A16F9C2183352E70011D02B /* chirp */ = {
 			isa = PBXGroup;
 			children = (
+				3AB318401834950C00C605CD /* Tweet+Create.h */,
+				3AB318411834950C00C605CD /* Tweet+Create.m */,
+				3AB318431834966000C605CD /* User+Create.h */,
+				3AB318441834966000C605CD /* User+Create.m */,
 				3A16F9CB183352E70011D02B /* AppDelegate.h */,
 				3A16F9CC183352E70011D02B /* AppDelegate.m */,
 				3A16F9CE183352E70011D02B /* Main.storyboard */,
-				3A16F9D1183352E70011D02B /* ViewController.h */,
-				3A16F9D2183352E70011D02B /* ViewController.m */,
+				3AB318371833D1C200C605CD /* User.h */,
+				3AB3183A1833D1C200C605CD /* Tweet.h */,
+				3AB3183B1833D1C200C605CD /* Tweet.m */,
+				3AB318381833D1C200C605CD /* User.m */,
+				3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */,
+				3A16F9F118339C700011D02B /* TweetFetchDemoVC.h */,
+				3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */,
 				3A16F9D4183352E70011D02B /* Images.xcassets */,
 				3A16F9C3183352E70011D02B /* Supporting Files */,
 			);
@@ -249,8 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A16F9D3183352E70011D02B /* ViewController.m in Sources */,
+				3AB3182A1833CF2C00C605CD /* chirp.xcdatamodeld in Sources */,
 				3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */,
+				3AB318421834950C00C605CD /* Tweet+Create.m in Sources */,
+				3AB318391833D1C200C605CD /* User.m in Sources */,
+				3AB3183C1833D1C200C605CD /* Tweet.m in Sources */,
+				3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */,
+				3AB318451834966000C605CD /* User+Create.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +500,7 @@
 				3A16F9ED183352E70011D02B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A16F9EE183352E70011D02B /* Build configuration list for PBXNativeTarget "chirpTests" */ = {
 			isa = XCConfigurationList;
@@ -468,8 +509,22 @@
 				3A16F9F0183352E70011D02B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3AB318291833CF2C00C605CD /* chirp.xcdatamodel */,
+			);
+			currentVersion = 3AB318291833CF2C00C605CD /* chirp.xcdatamodel */;
+			path = chirp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A16F9B1183352E70011D02B /* Project object */;
 }

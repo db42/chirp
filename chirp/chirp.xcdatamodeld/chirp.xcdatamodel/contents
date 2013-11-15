@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Tweet" representedClassName="Tweet" syncable="YES">
+        <attribute name="id_str" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="composer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="tweets" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="id_str" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="composer" inverseEntity="Tweet" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Tweet" positionX="160" positionY="192" width="128" height="88"/>
+        <element name="User" positionX="-36" positionY="189" width="128" height="103"/>
+    </elements>
+</model>
