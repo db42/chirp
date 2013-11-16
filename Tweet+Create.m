@@ -41,7 +41,7 @@
         tweet.id_str = [data objectForKey:@"id_str"];
         tweet.text = [data objectForKey:@"text"];
         
-        tweet.composer = [User initWithDict:data withManagedContext:managedContext];
+        tweet.composer = [User initWithDict:[data objectForKey:@"user"] withManagedContext:managedContext];
     }
     return tweet;
 }

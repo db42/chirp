@@ -32,8 +32,9 @@
     else
     {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedContext];
-        user.name = name;
+        user.name = [data objectForKey:@"name"];
         user.id_str = [data objectForKey:@"id_str"];
+        user.screen_name = [data objectForKey:@"screen_name"];
     }
     return user;
 }
