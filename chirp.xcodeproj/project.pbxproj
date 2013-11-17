@@ -26,6 +26,7 @@
 		3A16F9F91833A2E40011D02B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F81833A2E40011D02B /* Accounts.framework */; };
 		3A7CBB67183633720023E5DF /* FeedCDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CBB66183633720023E5DF /* FeedCDVC.m */; };
 		3A7CBB6A1836419D0023E5DF /* DemoFeedCDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CBB691836419D0023E5DF /* DemoFeedCDVC.m */; };
+		3A7CBB6D1838A0510023E5DF /* TweetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CBB6C1838A0510023E5DF /* TweetVC.m */; };
 		3AB3182A1833CF2C00C605CD /* chirp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */; };
 		3AB318391833D1C200C605CD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318381833D1C200C605CD /* User.m */; };
 		3AB3183C1833D1C200C605CD /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3183B1833D1C200C605CD /* Tweet.m */; };
@@ -71,6 +72,8 @@
 		3A7CBB66183633720023E5DF /* FeedCDVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCDVC.m; sourceTree = "<group>"; };
 		3A7CBB681836419D0023E5DF /* DemoFeedCDVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoFeedCDVC.h; sourceTree = "<group>"; };
 		3A7CBB691836419D0023E5DF /* DemoFeedCDVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoFeedCDVC.m; sourceTree = "<group>"; };
+		3A7CBB6B1838A0510023E5DF /* TweetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetVC.h; sourceTree = "<group>"; };
+		3A7CBB6C1838A0510023E5DF /* TweetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetVC.m; sourceTree = "<group>"; };
 		3AB318291833CF2C00C605CD /* chirp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = chirp.xcdatamodel; sourceTree = "<group>"; };
 		3AB318371833D1C200C605CD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		3AB318381833D1C200C605CD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				3A16F9CB183352E70011D02B /* AppDelegate.h */,
 				3A16F9CC183352E70011D02B /* AppDelegate.m */,
 				3A16F9CE183352E70011D02B /* Main.storyboard */,
+				3A7CBB6B1838A0510023E5DF /* TweetVC.h */,
+				3A7CBB6C1838A0510023E5DF /* TweetVC.m */,
 				3AB5E1BD1836233E00D7F9E4 /* CoreDataViewController.h */,
 				3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */,
 				3A7CBB65183633720023E5DF /* FeedCDVC.h */,
@@ -305,6 +310,7 @@
 				3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */,
 				3AB318421834950C00C605CD /* Tweet+Create.m in Sources */,
 				3AB318391833D1C200C605CD /* User.m in Sources */,
+				3A7CBB6D1838A0510023E5DF /* TweetVC.m in Sources */,
 				3AB3183C1833D1C200C605CD /* Tweet.m in Sources */,
 				3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,

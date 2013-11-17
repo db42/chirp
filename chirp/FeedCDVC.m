@@ -10,6 +10,7 @@
 #import "CoreData/CoreData.h"
 #import "Tweet.h"
 #import "User.h"
+#import "TweetVC.h"
 
 @interface FeedCDVC ()
 
@@ -23,6 +24,20 @@
     
     [self loadFetchedResultController];
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"setTweet"])
+    {
+        id destination = [segue destinationViewController];
+        if ([destination respondsToSelector:@selector(setTweet:)])
+        {
+            Tweet *tweet = [self.resultController objectAtIndexPath:[self.tableView indexPathForCell:sender]];
+            [destination performSelector:@selector(setTweet:) withObject:tweet];
+        }
+        
+    }
 }
 
 - (void) loadFetchedResultController
