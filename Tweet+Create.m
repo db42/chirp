@@ -14,7 +14,7 @@
 + (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
 {
     NSString *tweetId = [data objectForKey:@"id_str"];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
     request.predicate = [NSPredicate predicateWithFormat:@"id_str == %@", tweetId];
     request.sortDescriptors = Nil;
     
