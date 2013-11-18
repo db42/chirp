@@ -13,11 +13,17 @@
 #import "User.h"
 
 @interface DemoFeedCDVC ()
+@property (weak, nonatomic) IBOutlet UIRefreshControl *refreshController;
 
 @property (nonatomic) ACAccountStore *accountStore;
 @end
 
 @implementation DemoFeedCDVC
+
+- (IBAction)refreshView {
+    [self.refreshControl beginRefreshing];
+    [self fetchTweets];
+}
 
 - (ACAccountStore *)accountStore
 {
@@ -30,10 +36,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setUpManagedContext];
-    
-    //load tweets
-    [self fetchTweets];
+    if (!self. managedContext)
+    {
+        [self setUpManagedContext];
+        
+        //load tweets
+        [self refreshView];
+    }
 }
 
 - (void) fetchTweets
@@ -65,6 +74,10 @@
                          NSError *error = nil;
                          [self.managedContext save:&error];
                      }
+                     //on ui thread
+                     dispatch_async(dispatch_get_main_queue(), ^(void){
+                         [self.refreshControl endRefreshing];
+                     });
                  }
                 }];
              
