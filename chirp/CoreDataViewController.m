@@ -23,7 +23,10 @@
     {
         NSError *error;
         BOOL success = [_resultController performFetch:&error];
-        [self.tableView reloadData];
+        if (success)
+        {
+            [self.tableView reloadData];
+        }
     }
 }
 #pragma mark - Table view data source
