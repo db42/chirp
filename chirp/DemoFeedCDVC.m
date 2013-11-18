@@ -21,7 +21,7 @@
 @implementation DemoFeedCDVC
 
 - (IBAction)refreshView {
-    [self.refreshControl beginRefreshing];
+    [self.refreshController beginRefreshing];
     [self fetchTweets];
 }
 
@@ -76,7 +76,7 @@
                      }
                      //on ui thread
                      dispatch_async(dispatch_get_main_queue(), ^(void){
-                         [self.refreshControl endRefreshing];
+                         [self.refreshController endRefreshing];
                      });
                  }
                 }];

@@ -54,7 +54,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <outlet property="refreshController" destination="3Ah-Uv-BnD" id="ydh-VD-jtQ"/>
+                        <outlet property="refreshController" destination="3Ah-Uv-BnD" id="ckX-9T-wZt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3v-pB-mW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
