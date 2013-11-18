@@ -13,9 +13,9 @@
 
 + (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
 {
-    NSString *id_str = [data objectForKey:@"id_str"];
+    NSString *tweetId = [data objectForKey:@"id_str"];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    request.predicate = [NSPredicate predicateWithFormat:@"id_str = %@", id_str];
+    request.predicate = [NSPredicate predicateWithFormat:@"id_str == %@", tweetId];
     request.sortDescriptors = Nil;
     
     NSError *error;
@@ -42,6 +42,9 @@
         tweet.text = [data objectForKey:@"text"];
         
         tweet.composer = [User initWithDict:[data objectForKey:@"user"] withManagedContext:managedContext];
+        
+        
+        [managedContext save:&error];
     }
     return tweet;
 }

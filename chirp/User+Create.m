@@ -13,8 +13,8 @@
 + (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    NSString *name = [data objectForKey:@"name"];
-    request.predicate = [NSPredicate predicateWithFormat:@"id_str = %@", name];
+    NSString *userId = [data objectForKey:@"id_str"];
+    request.predicate = [NSPredicate predicateWithFormat:@"id_str == %@", userId];
     request.sortDescriptors = nil;
     
     User *user;
@@ -35,6 +35,8 @@
         user.name = [data objectForKey:@"name"];
         user.id_str = [data objectForKey:@"id_str"];
         user.screen_name = [data objectForKey:@"screen_name"];
+        
+        [managedContext save:&error];
     }
     return user;
 }
