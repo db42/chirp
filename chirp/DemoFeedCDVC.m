@@ -53,8 +53,8 @@
      {
          if (granted)
          {
-            NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/user_timeline.json"relativeToURL:Nil];
-            NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"3"};
+            NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/home_timeline.json"relativeToURL:Nil];
+            NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20"};
             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:feedUrl parameters:params];
              
              NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
