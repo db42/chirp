@@ -33,6 +33,7 @@
 		3AB318421834950C00C605CD /* Tweet+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318411834950C00C605CD /* Tweet+Create.m */; };
 		3AB318451834966000C605CD /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318441834966000C605CD /* User+Create.m */; };
 		3AB5E1BF1836233E00D7F9E4 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */; };
+		3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799D8183B415800A65C98 /* TwitterFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		3AB318441834966000C605CD /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		3AB5E1BD1836233E00D7F9E4 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
 		3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
+		3AC799D7183B415800A65C98 /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
+		3AC799D8183B415800A65C98 /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,8 @@
 				3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */,
 				3A16F9D4183352E70011D02B /* Images.xcassets */,
 				3A16F9C3183352E70011D02B /* Supporting Files */,
+				3AC799D7183B415800A65C98 /* TwitterFetcher.h */,
+				3AC799D8183B415800A65C98 /* TwitterFetcher.m */,
 			);
 			path = chirp;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
+				3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */,
 				3AB5E1BF1836233E00D7F9E4 /* CoreDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

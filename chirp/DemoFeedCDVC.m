@@ -11,27 +11,25 @@
 #import <Social/Social.h>
 #import "Tweet+Create.h"
 #import "User.h"
+#import "TwitterFetcher.h"
 
 @interface DemoFeedCDVC ()
 @property (weak, nonatomic) IBOutlet UIRefreshControl *refreshController;
+@property (strong, nonatomic) TwitterFetcher *tweetFetcher;
 
-@property (nonatomic) ACAccountStore *accountStore;
 @end
 
 @implementation DemoFeedCDVC
 
-- (IBAction)refreshView {
-    [self.refreshController beginRefreshing];
-    [self fetchTweets];
+- (TwitterFetcher *)tweetFetcher
+{
+    if (!_tweetFetcher) _tweetFetcher = [[TwitterFetcher alloc] init];
+    return _tweetFetcher;
 }
 
-- (ACAccountStore *)accountStore
-{
-    if (!_accountStore)
-    {
-        _accountStore = [[ACAccountStore alloc] init];
-    }
-    return _accountStore;
+- (IBAction)refreshView {
+    [self.refreshController beginRefreshing];
+    [self fetchAndLoadTweets];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -45,46 +43,24 @@
     }
 }
 
-- (void) fetchTweets
+- (void) fetchAndLoadTweets
 {
-    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
-    [self.accountStore requestAccessToAccountsWithType:twitterAccountType options:NULL completion:^(BOOL granted, NSError *error)
-     {
-         if (granted)
-         {
-            NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/home_timeline.json"relativeToURL:Nil];
-            NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20"};
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:feedUrl parameters:params];
-             
-             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
-             
-             [request setAccount:[twitterAccounts lastObject]];
-             
-             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                 
-                 if (responseData && urlResponse.statusCode == 200)
-                 {
-                     NSError *err;
-                     NSArray *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
-                     for (NSDictionary *data in feedDict)
-                     {
-                         Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
-                         NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
-                         NSError *error = nil;
-                         [self.managedContext save:&error];
-                     }
-                     //on ui thread
-                     dispatch_async(dispatch_get_main_queue(), ^(void){
-                         [self.refreshController endRefreshing];
-                     });
-                 }
-                }];
-             
-         }
+    [self.tweetFetcher fetchTweets:20 withCallBackBlock:^(NSArray *tweetsData) {
+        for (NSDictionary *data in tweetsData)
+        {
+            Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
+
+            NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
+            NSError *error = nil;
+            [self.managedContext save:&error];
+        }
+        //on ui thread
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self.refreshController endRefreshing];
+        });
     }];
-    
 }
+
 - (void) setUpManagedContext
 {
     if (!self.managedContext)
