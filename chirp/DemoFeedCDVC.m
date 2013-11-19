@@ -70,7 +70,7 @@
                      for (NSDictionary *data in feedDict)
                      {
                          Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
-                         NSLog(@"tweet parsing - %@ %@", tweet.text, tweet.composer.name);
+                         NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
                          NSError *error = nil;
                          [self.managedContext save:&error];
                      }
