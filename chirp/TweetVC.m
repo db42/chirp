@@ -8,9 +8,11 @@
 
 #import "TweetVC.h"
 #import "User.h"
+#import "UIImageView+Create.h"
 
 @interface TweetVC ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetComposerName;
+@property (weak, nonatomic) IBOutlet UIImageView *composerImage;
 @property (weak, nonatomic) IBOutlet UITextView *tweetComposerScreenName;
 @property (weak, nonatomic) IBOutlet UITextView *tweetText;
 
@@ -20,9 +22,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.tweetComposerName.text = self.tweet.composer.name;
-    self.tweetComposerScreenName.text = self.tweet.composer.screen_name;
-    self.tweetText.text = self.tweet.text;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,7 +41,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSURL *url = [NSURL URLWithString:self.tweet.composer.profile_image_url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    UIImage *image = [UIImage imageWithData:data];
+    if (image)
+    {
+        self.composerImage.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        self.composerImage.image = image;
+    }
 	// Do any additional setup after loading the view.
+    self.tweetComposerName.text = self.tweet.composer.name;
+    self.tweetComposerScreenName.text = self.tweet.composer.screen_name;
+    self.tweetText.text = self.tweet.text;
+    
 }
 
 - (void)didReceiveMemoryWarning

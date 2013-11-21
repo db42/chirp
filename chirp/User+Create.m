@@ -35,6 +35,11 @@
         user.name = [data objectForKey:@"name"];
         user.id_str = [data objectForKey:@"id_str"];
         user.screen_name = [data objectForKey:@"screen_name"];
+        user.profile_image_url = [data objectForKey:@"profile_image_url"];
+        user.profile_background_image_url = [data objectForKey:@"profile_background_image_url"];
+        user.statuses_count = [data objectForKey:@"statuses_count"];
+        user.followers_count = [data objectForKey:@"followers_count"];
+        user.friends_count = [data objectForKey:@"friends_count"];
         
         [managedContext save:&error];
     }

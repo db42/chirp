@@ -25,6 +25,29 @@
     return _accountStore;
 }
 
+- (void) fetchUserWithScreenName: (NSString *)screenName withCallBackBlock:(void (^)(NSDictionary * tweetsData))callBackBlock
+{
+    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json" relativeToURL:Nil];
+    
+    NSDictionary *params = @{@"screen_name": @"dushyant_db"};
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:feedUrl parameters:params];
+             
+             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
+             
+             [request setAccount:[twitterAccounts lastObject]];
+             
+             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 if (responseData && urlResponse.statusCode == 200)
+                 {
+                     NSError *err;
+                     NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
+                     callBackBlock(feedDict);
+                 }
+                }];
+}
+
 
 -(void)fetchTweets:(int)count withCallBackBlock:(void (^)(NSArray * tweetsData))callBackBlock
 {

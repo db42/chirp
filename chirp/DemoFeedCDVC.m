@@ -10,16 +10,19 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "Tweet+Create.h"
-#import "User.h"
+#import "User+Create.h"
 #import "TwitterFetcher.h"
+#import "ProfileVC.h"
 
 @interface DemoFeedCDVC ()
 @property (weak, nonatomic) IBOutlet UIRefreshControl *refreshController;
 @property (strong, nonatomic) TwitterFetcher *tweetFetcher;
+@property (strong, nonatomic) User *user;
 
 @end
 
 @implementation DemoFeedCDVC
+
 
 - (TwitterFetcher *)tweetFetcher
 {
@@ -59,6 +62,20 @@
         [self.refreshController endRefreshing];
         });
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
+    if ([segue.identifier isEqualToString:@"setUserScreenName"])
+    {
+        id destController = [segue destinationViewController];
+        if ([destController respondsToSelector:@selector(setUserScreenName:)])
+        {
+            [destController performSelector:@selector(setUserScreenName:) withObject:@"dushyant_db"];
+            [destController performSelector:@selector(setManagedContext:) withObject:self.managedContext];
+        }
+    }
 }
 
 - (void) setUpManagedContext

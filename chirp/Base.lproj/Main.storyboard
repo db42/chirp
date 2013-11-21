@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tweet row" textLabel="kbH-oB-jVz" detailTextLabel="aoQ-Hu-7wJ" rowHeight="71" style="IBUITableViewCellStyleSubtitle" id="WCE-8o-Q1y">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tweet row" textLabel="kbH-oB-jVz" detailTextLabel="NDc-e1-3Rr" rowHeight="71" style="IBUITableViewCellStyleSubtitle" id="WCE-8o-Q1y">
                                 <rect key="frame" x="0.0" y="86" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCE-8o-Q1y" id="KpM-7D-azO">
@@ -27,7 +27,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aoQ-Hu-7wJ">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NDc-e1-3Rr">
                                             <rect key="frame" x="15" y="39" width="43" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -46,7 +46,13 @@
                             <outlet property="delegate" destination="pUm-iQ-kID" id="wqM-cW-hDs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zwv-tm-epj"/>
+                    <navigationItem key="navigationItem" id="zwv-tm-epj">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="6di-dV-4TV">
+                            <connections>
+                                <segue destination="Ixg-LA-wgv" kind="push" identifier="setUserScreenName" id="Ldb-RZ-OAr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="3Ah-Uv-BnD">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -59,7 +65,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3v-pB-mW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-116" y="-1441"/>
+            <point key="canvasLocation" x="-60" y="-955"/>
         </scene>
         <!--TweetVC-->
         <scene sceneID="fpU-Rr-OUD">
@@ -80,25 +86,37 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do n legum odioque civiuda." translatesAutoresizingMaskIntoConstraints="NO" id="TgY-TE-tPb">
-                                <rect key="frame" x="55" y="83" width="138" height="45"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgY-TE-tPb">
+                                <rect key="frame" x="177" y="82" width="138" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do n legum odioque civiuda." translatesAutoresizingMaskIntoConstraints="NO" id="rBE-KP-rGV">
-                                <rect key="frame" x="55" y="141" width="138" height="45"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBE-KP-rGV">
+                                <rect key="frame" x="177" y="140" width="138" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KzM-JG-yWT">
+                                <rect key="frame" x="12" y="82" width="146" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krJ-Fy-OmZ">
+                                <rect key="frame" x="70" y="465" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="H7b-HO-Vui"/>
                     <connections>
+                        <outlet property="composerImage" destination="KzM-JG-yWT" id="m3H-7P-nUm"/>
                         <outlet property="tweetComposerName" destination="TgY-TE-tPb" id="GdS-Yc-lQF"/>
                         <outlet property="tweetComposerScreenName" destination="rBE-KP-rGV" id="Bha-lB-jsF"/>
                         <outlet property="tweetText" destination="he5-UB-xLq" id="MAO-ot-DBc"/>
@@ -106,7 +124,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysL-ao-TPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="567" y="-1468"/>
+            <point key="canvasLocation" x="1013" y="-955"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="Nni-52-OWy">
+            <objects>
+                <viewController id="Ixg-LA-wgv" customClass="ProfileVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dN8-h8-lwW"/>
+                        <viewControllerLayoutGuide type="bottom" id="vA1-sO-OQH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FZd-s5-c8N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJd-D0-aXp">
+                                <rect key="frame" x="0.0" y="64" width="323" height="212"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XYB-yx-nB3">
+                                <rect key="frame" x="102" y="85" width="117" height="87"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wya-54-Efe">
+                                <rect key="frame" x="105" y="186" width="110" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiF-V7-fjk">
+                                <rect key="frame" x="105" y="232" width="110" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Wve-cl-RxE">
+                                <rect key="frame" x="0.0" y="276" width="106" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mea-Z7-7bo">
+                                <rect key="frame" x="107" y="276" width="106" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InT-bS-MSb">
+                                <rect key="frame" x="214" y="276" width="106" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ygX-dt-0fr">
+                                <rect key="frame" x="0.0" y="327" width="320" height="235"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gV3-fU-ksy"/>
+                    <connections>
+                        <outlet property="contentsTable" destination="ygX-dt-0fr" id="GdK-Dn-ECg"/>
+                        <outlet property="followersCountButton" destination="Mea-Z7-7bo" id="roE-2G-Rum"/>
+                        <outlet property="friendsCount" destination="InT-bS-MSb" id="eii-cz-G3s"/>
+                        <outlet property="nameView" destination="wya-54-Efe" id="nGq-VP-joG"/>
+                        <outlet property="profileBackgroundImageView" destination="iJd-D0-aXp" id="AvZ-ZN-9fv"/>
+                        <outlet property="profileImageView" destination="XYB-yx-nB3" id="no3-pc-qGj"/>
+                        <outlet property="screenNameView" destination="uiF-V7-fjk" id="Ht8-8S-9Nk"/>
+                        <outlet property="tweetsCount" destination="Wve-cl-RxE" id="CfC-1W-Ufe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I3E-wT-sP5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="549" y="-555"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ECl-lQ-ZLk">
@@ -124,7 +219,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6q-Gg-ihZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-642" y="-1441"/>
+            <point key="canvasLocation" x="-586" y="-955"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
