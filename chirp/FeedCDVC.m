@@ -53,6 +53,22 @@
     self.resultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedContext sectionNameKeyPath:nil cacheName:nil];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Tweet *tweet = [self.resultController objectAtIndexPath:indexPath];
+    NSString *text = tweet.text;
+    
+    CGSize maxSize = CGSizeMake(206.0f, MAXFLOAT);
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0]}];
+    
+    
+    CGRect rect = [attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    CGSize size = rect.size;
+//    NSLog(@"%@ %f", indexPath, size.height);
+    return ceil(size.height) + 35;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tweet row"];
@@ -60,8 +76,19 @@
     
     Tweet *tweet = [self.resultController objectAtIndexPath:indexPath];
     
+    NSURL *url = [NSURL URLWithString:tweet.composer.profile_image_url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    UIImage *image = [UIImage imageWithData:data];
+    if (image)
+    {
+        cell.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        cell.imageView.image = image;
+    }
     cell.textLabel.text = tweet.composer.name;
     cell.detailTextLabel.text = tweet.text;
+    
+    cell.detailTextLabel.numberOfLines = 0;
     
     return cell;
 }

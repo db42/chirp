@@ -8,7 +8,7 @@
 
 #import "CoreDataViewController.h"
 
-@interface FeedCDVC : CoreDataViewController
+@interface FeedCDVC : CoreDataViewController <UITableViewDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedContext;
 
 @end

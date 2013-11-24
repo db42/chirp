@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0432841841F8D400DBE006 /* testimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3A0432831841F8D400DBE006 /* testimage.jpeg */; };
 		3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
 		3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BE183352E70011D02B /* CoreGraphics.framework */; };
 		3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A0432831841F8D400DBE006 /* testimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testimage.jpeg; path = ../../../Desktop/testimage.jpeg; sourceTree = "<group>"; };
 		3A16F9B9183352E70011D02B /* chirp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A16F9BC183352E70011D02B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A16F9BE183352E70011D02B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -176,6 +178,7 @@
 				3A16F9F118339C700011D02B /* TweetFetchDemoVC.h */,
 				3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */,
 				3A16F9D4183352E70011D02B /* Images.xcassets */,
+				3A0432831841F8D400DBE006 /* testimage.jpeg */,
 				3AC799DD183C744C00A65C98 /* Model */,
 				3A16F9C3183352E70011D02B /* Supporting Files */,
 				3AC799DE183C745A00A65C98 /* Fetcher */,
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A16F9D5183352E70011D02B /* Images.xcassets in Resources */,
+				3A0432841841F8D400DBE006 /* testimage.jpeg in Resources */,
 				3A16F9C7183352E70011D02B /* InfoPlist.strings in Resources */,
 				3A16F9D0183352E70011D02B /* Main.storyboard in Resources */,
 			);
