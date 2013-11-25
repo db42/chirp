@@ -8,7 +8,6 @@
 
 #import "TweetVC.h"
 #import "User.h"
-#import "UIImageView+Create.h"
 
 @interface TweetVC ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetComposerName;

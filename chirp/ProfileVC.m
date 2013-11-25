@@ -7,7 +7,6 @@
 //
 
 #import "ProfileVC.h"
-#import "UIImageView+Create.h"
 #import "TwitterFetcher.h"
 #import "User+Create.h"
 

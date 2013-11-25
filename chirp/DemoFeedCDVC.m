@@ -1,4 +1,7 @@
 //
+//    NSInteger sectionIndex = [self.tableView numberOfSections] - 1;
+
+//    NSInteger rowIndex = [self.tableView numberOfRowsInSection:sectionIndex] - 1;
 //  DemoFeedCDVC.m
 //  chirp
 //
@@ -30,38 +33,102 @@
     return _tweetFetcher;
 }
 
-- (IBAction)refreshView {
-    [self.refreshController beginRefreshing];
-    [self fetchAndLoadTweets];
-}
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    if (!self. managedContext)
+    if (!self.managedContext)
     {
-        [self setUpManagedContext];
+        [self initManagedContext];
         
         //load tweets
         [self refreshView];
     }
 }
 
+- (void) initManagedContext
+{
+    if (!self.managedContext)
+    {
+        NSURL *fileUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        
+        fileUrl = [fileUrl URLByAppendingPathComponent:@"demo doc"];
+        UIManagedDocument *document= [[UIManagedDocument alloc] initWithFileURL:fileUrl];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[fileUrl path]])
+        {
+            self.managedContext = document.managedObjectContext;
+        }
+        else
+        {
+            [document saveToURL:fileUrl
+               forSaveOperation:UIDocumentSaveForCreating
+              completionHandler:^(BOOL success){
+                if (success)
+                {
+                    self.managedContext = document.managedObjectContext;
+                }
+            }];
+        }
+    }
+}
+
+- (IBAction)refreshView {
+    [self.refreshController beginRefreshing];
+    [self fetchAndLoadTweets];
+}
+
 - (void) fetchAndLoadTweets
 {
     [self.tweetFetcher fetchTweets:20 withCallBackBlock:^(NSArray *tweetsData) {
-        for (NSDictionary *data in tweetsData)
-        {
-            Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
-
-            NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
-            NSError *error = nil;
-            [self.managedContext save:&error];
-        }
-        //on ui thread
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-        [self.refreshController endRefreshing];
-        });
+        [self loadTweetsFromTweetsDict:tweetsData];
     }];
+}
+
+- (void)loadTweetsFromTweetsDict:(NSArray *)tweetsData
+{
+    for (NSDictionary *data in tweetsData)
+    {
+        Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
+        
+        NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
+        NSError *error = nil;
+        [self.managedContext save:&error];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self.refreshController endRefreshing];
+    });
+}
+
+bool loading = false;
+
+- (void)loadMoreRows
+{
+    NSInteger sectionIndex = [[self.resultController sections] count] - 1;
+    if (sectionIndex < 0)
+    {
+        return;
+    }
+    
+    NSInteger rowIndex = [[[self.resultController sections] objectAtIndex:sectionIndex] numberOfObjects] - 1;
+    if (rowIndex < 0)
+    {
+        return;
+    }
+    
+    if (loading)
+        return;
+    
+    loading = true;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+    
+    Tweet *lastTweet =[self.resultController objectAtIndexPath:indexPath];
+    NSString *lastTweetId = lastTweet.id_str;
+    if (lastTweetId)
+    {
+        [self.tweetFetcher fetchPreviousTweets:20 withId:lastTweetId withCallBackBlock:^(NSArray *tweetsData) {
+            [self loadTweetsFromTweetsDict:tweetsData];
+//            loading = false;
+        }];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -76,37 +143,5 @@
             [destController performSelector:@selector(setManagedContext:) withObject:self.managedContext];
         }
     }
-}
-
-- (void) setUpManagedContext
-{
-    if (!self.managedContext)
-    {
-        //create managedcontext
-        NSURL *fileUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        
-        fileUrl = [fileUrl URLByAppendingPathComponent:@"demo doc"];
-        UIManagedDocument *document= [[UIManagedDocument alloc] initWithFileURL:fileUrl];
-        
-        //if file exists
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[fileUrl path]])
-        {
-            self.managedContext = document.managedObjectContext;
-        }
-        else
-        {
-//            NSLog(@"function %s ", __PRETTY_FUNCTION__);
-            //create file
-            [document saveToURL:fileUrl
-               forSaveOperation:UIDocumentSaveForCreating
-              completionHandler:^(BOOL success){
-                if (success)
-                {
-                    self.managedContext = document.managedObjectContext;
-                }
-            }];
-        }
-    }
-    
 }
 @end

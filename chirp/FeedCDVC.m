@@ -93,4 +93,21 @@
     return cell;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat contentHeight = scrollView.contentSize.height;
+    
+    CGFloat yOffset = scrollView.contentOffset.y;
+    CGFloat inset = scrollView.contentInset.bottom;
+    CGFloat scrollHeight = scrollView.bounds.size.height;
+    
+    CGFloat scrolledContentHeight = yOffset + scrollHeight - inset;
+    
+    CGFloat reloadDistance = 10;
+    if (scrolledContentHeight > contentHeight + reloadDistance)
+    {
+        [self loadMoreRows];
+    }
+}
+
 @end

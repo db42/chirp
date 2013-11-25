@@ -9,6 +9,7 @@
 #import "CoreDataViewController.h"
 
 @interface FeedCDVC : CoreDataViewController <UITableViewDelegate>
+- (void) loadMoreRows;
 @property (strong, nonatomic) NSManagedObjectContext *managedContext;
 
 @end

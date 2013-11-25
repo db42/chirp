@@ -21,7 +21,6 @@
 		3A16F9DE183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
 		3A16F9E6183352E70011D02B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A16F9E4183352E70011D02B /* InfoPlist.strings */; };
 		3A16F9E8183352E70011D02B /* chirpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9E7183352E70011D02B /* chirpTests.m */; };
-		3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */; };
 		3A16F9F518339E630011D02B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F418339E630011D02B /* Twitter.framework */; };
 		3A16F9F71833A0C10011D02B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F61833A0C10011D02B /* Social.framework */; };
 		3A16F9F91833A2E40011D02B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F81833A2E40011D02B /* Accounts.framework */; };
@@ -36,7 +35,6 @@
 		3AC799E1183C748400A65C98 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799E0183C748400A65C98 /* ProfileVC.m */; };
 		3AC799F0183C8C2200A65C98 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799EF183C8C2200A65C98 /* User.m */; };
 		3AC799F3183C8C2300A65C98 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799F2183C8C2300A65C98 /* Tweet.m */; };
-		3AC799F6183C9A3400A65C98 /* UIImageView+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799F5183C9A3400A65C98 /* UIImageView+Create.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +66,6 @@
 		3A16F9E3183352E70011D02B /* chirpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "chirpTests-Info.plist"; sourceTree = "<group>"; };
 		3A16F9E5183352E70011D02B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A16F9E7183352E70011D02B /* chirpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpTests.m; sourceTree = "<group>"; };
-		3A16F9F118339C700011D02B /* TweetFetchDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetFetchDemoVC.h; sourceTree = "<group>"; };
-		3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetFetchDemoVC.m; sourceTree = "<group>"; };
 		3A16F9F418339E630011D02B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		3A16F9F61833A0C10011D02B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3A16F9F81833A2E40011D02B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -94,8 +90,6 @@
 		3AC799EF183C8C2200A65C98 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		3AC799F1183C8C2300A65C98 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
 		3AC799F2183C8C2300A65C98 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
-		3AC799F4183C9A3400A65C98 /* UIImageView+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Create.h"; sourceTree = "<group>"; };
-		3AC799F5183C9A3400A65C98 /* UIImageView+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Create.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +158,6 @@
 				3A16F9CB183352E70011D02B /* AppDelegate.h */,
 				3A16F9CC183352E70011D02B /* AppDelegate.m */,
 				3A16F9CE183352E70011D02B /* Main.storyboard */,
-				3AC799F4183C9A3400A65C98 /* UIImageView+Create.h */,
-				3AC799F5183C9A3400A65C98 /* UIImageView+Create.m */,
 				3A7CBB6B1838A0510023E5DF /* TweetVC.h */,
 				3AC799DF183C748400A65C98 /* ProfileVC.h */,
 				3AC799E0183C748400A65C98 /* ProfileVC.m */,
@@ -175,8 +167,6 @@
 				3A7CBB681836419D0023E5DF /* DemoFeedCDVC.h */,
 				3A7CBB691836419D0023E5DF /* DemoFeedCDVC.m */,
 				3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */,
-				3A16F9F118339C700011D02B /* TweetFetchDemoVC.h */,
-				3A16F9F218339C700011D02B /* TweetFetchDemoVC.m */,
 				3A16F9D4183352E70011D02B /* Images.xcassets */,
 				3A0432831841F8D400DBE006 /* testimage.jpeg */,
 				3AC799DD183C744C00A65C98 /* Model */,
@@ -347,12 +337,10 @@
 				3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */,
 				3AB318421834950C00C605CD /* Tweet+Create.m in Sources */,
 				3A7CBB6D1838A0510023E5DF /* TweetVC.m in Sources */,
-				3A16F9F318339C700011D02B /* TweetFetchDemoVC.m in Sources */,
 				3AC799F3183C8C2300A65C98 /* Tweet.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
 				3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */,
-				3AC799F6183C9A3400A65C98 /* UIImageView+Create.m in Sources */,
 				3AB5E1BF1836233E00D7F9E4 /* CoreDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
