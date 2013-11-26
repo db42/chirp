@@ -17,6 +17,8 @@
 #import "TwitterFetcher.h"
 #import "ProfileVC.h"
 
+#define TWITTER_POLL_INTERVAL_SEC 60.0
+
 @interface DemoFeedCDVC ()
 @property (weak, nonatomic) IBOutlet UIRefreshControl *refreshController;
 @property (strong, nonatomic) TwitterFetcher *tweetFetcher;
@@ -25,6 +27,8 @@
 @end
 
 @implementation DemoFeedCDVC
+
+NSTimer *pullNewTweetsTimer;
 
 
 - (TwitterFetcher *)tweetFetcher
@@ -127,6 +131,14 @@
         //        NSError *error = nil;
         //        [self.managedContext save:&error];
     }
+    
+    if (pullNewTweetsTimer)
+    {
+        [pullNewTweetsTimer invalidate];
+        pullNewTweetsTimer = nil;
+    }
+    pullNewTweetsTimer = [NSTimer scheduledTimerWithTimeInterval:TWITTER_POLL_INTERVAL_SEC target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+    
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [self.refreshController endRefreshing];
     });
