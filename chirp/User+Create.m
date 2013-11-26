@@ -14,7 +14,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     NSString *userId = [data objectForKey:@"id_str"];
-    request.predicate = [NSPredicate predicateWithFormat:@"id_str == %@", userId];
+    request.predicate = [NSPredicate predicateWithFormat:@"id_str = %@", userId];
     request.sortDescriptors = nil;
     
     User *user;

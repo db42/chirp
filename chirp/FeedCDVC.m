@@ -93,6 +93,10 @@
     return cell;
 }
 
+- (void)loadMoreRows
+{
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat contentHeight = scrollView.contentSize.height;

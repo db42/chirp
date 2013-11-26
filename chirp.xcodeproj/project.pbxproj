@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0432841841F8D400DBE006 /* testimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3A0432831841F8D400DBE006 /* testimage.jpeg */; };
+		3A04328718433F1100DBE006 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A04328618433F1100DBE006 /* CoreDataViewController.m */; };
 		3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
 		3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BE183352E70011D02B /* CoreGraphics.framework */; };
 		3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
@@ -30,7 +31,6 @@
 		3AB3182A1833CF2C00C605CD /* chirp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */; };
 		3AB318421834950C00C605CD /* Tweet+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318411834950C00C605CD /* Tweet+Create.m */; };
 		3AB318451834966000C605CD /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318441834966000C605CD /* User+Create.m */; };
-		3AB5E1BF1836233E00D7F9E4 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */; };
 		3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799D8183B415800A65C98 /* TwitterFetcher.m */; };
 		3AC799E1183C748400A65C98 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799E0183C748400A65C98 /* ProfileVC.m */; };
 		3AC799F0183C8C2200A65C98 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799EF183C8C2200A65C98 /* User.m */; };
@@ -49,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		3A0432831841F8D400DBE006 /* testimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testimage.jpeg; path = ../../../Desktop/testimage.jpeg; sourceTree = "<group>"; };
+		3A04328518433F1100DBE006 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
+		3A04328618433F1100DBE006 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
 		3A16F9B9183352E70011D02B /* chirp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A16F9BC183352E70011D02B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A16F9BE183352E70011D02B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,8 +82,6 @@
 		3AB318411834950C00C605CD /* Tweet+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Tweet+Create.m"; path = "../Tweet+Create.m"; sourceTree = "<group>"; };
 		3AB318431834966000C605CD /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		3AB318441834966000C605CD /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
-		3AB5E1BD1836233E00D7F9E4 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
-		3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
 		3AC799D7183B415800A65C98 /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
 		3AC799D8183B415800A65C98 /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		3AC799DF183C748400A65C98 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
@@ -208,6 +208,8 @@
 		3AC799DD183C744C00A65C98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A04328518433F1100DBE006 /* CoreDataViewController.h */,
+				3A04328618433F1100DBE006 /* CoreDataViewController.m */,
 				3AC799EE183C8C2200A65C98 /* User.h */,
 				3AC799F1183C8C2300A65C98 /* Tweet.h */,
 				3AC799F2183C8C2300A65C98 /* Tweet.m */,
@@ -216,8 +218,6 @@
 				3AB318411834950C00C605CD /* Tweet+Create.m */,
 				3AB318431834966000C605CD /* User+Create.h */,
 				3AB318441834966000C605CD /* User+Create.m */,
-				3AB5E1BD1836233E00D7F9E4 /* CoreDataViewController.h */,
-				3AB5E1BE1836233E00D7F9E4 /* CoreDataViewController.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -337,11 +337,11 @@
 				3A16F9CD183352E70011D02B /* AppDelegate.m in Sources */,
 				3AB318421834950C00C605CD /* Tweet+Create.m in Sources */,
 				3A7CBB6D1838A0510023E5DF /* TweetVC.m in Sources */,
+				3A04328718433F1100DBE006 /* CoreDataViewController.m in Sources */,
 				3AC799F3183C8C2300A65C98 /* Tweet.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
 				3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */,
-				3AB5E1BF1836233E00D7F9E4 /* CoreDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

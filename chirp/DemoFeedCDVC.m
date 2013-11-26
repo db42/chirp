@@ -53,11 +53,7 @@
         fileUrl = [fileUrl URLByAppendingPathComponent:@"demo doc"];
         UIManagedDocument *document= [[UIManagedDocument alloc] initWithFileURL:fileUrl];
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[fileUrl path]])
-        {
-            self.managedContext = document.managedObjectContext;
-        }
-        else
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[fileUrl path]])
         {
             [document saveToURL:fileUrl
                forSaveOperation:UIDocumentSaveForCreating
@@ -67,6 +63,19 @@
                     self.managedContext = document.managedObjectContext;
                 }
             }];
+        }
+        else if (document.documentState == UIDocumentStateClosed)
+        {
+            [document openWithCompletionHandler:^(BOOL success){
+                if (success)
+                {
+                    self.managedContext = document.managedObjectContext;
+                }
+            }];
+        }
+        else
+        {
+            self.managedContext = document.managedObjectContext;
         }
     }
 }
@@ -79,20 +88,22 @@
 - (void) fetchAndLoadTweets
 {
     [self.tweetFetcher fetchTweets:20 withCallBackBlock:^(NSArray *tweetsData) {
-        [self loadTweetsFromTweetsDict:tweetsData];
+        [self.managedContext performBlock:^{
+            [self loadTweetsFromTweetsDict:tweetsData];
+        }];
     }];
 }
 
 - (void)loadTweetsFromTweetsDict:(NSArray *)tweetsData
 {
-    for (NSDictionary *data in tweetsData)
-    {
-        Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
-        
-        NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
-        NSError *error = nil;
-        [self.managedContext save:&error];
-    }
+            for (NSDictionary *data in tweetsData)
+            {
+                Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
+                
+                NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
+                //        NSError *error = nil;
+                //        [self.managedContext save:&error];
+            }
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [self.refreshController endRefreshing];
     });
@@ -125,8 +136,10 @@ bool loading = false;
     if (lastTweetId)
     {
         [self.tweetFetcher fetchPreviousTweets:20 withId:lastTweetId withCallBackBlock:^(NSArray *tweetsData) {
-            [self loadTweetsFromTweetsDict:tweetsData];
-//            loading = false;
+            [self.managedContext performBlock:^(void){
+                [self loadTweetsFromTweetsDict:tweetsData];
+                loading = false;
+            }];
         }];
     }
 }
