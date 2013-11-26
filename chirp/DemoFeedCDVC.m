@@ -16,6 +16,7 @@
 #import "User+Create.h"
 #import "TwitterFetcher.h"
 #import "ProfileVC.h"
+#import "NetworkActivityIndicator.h"
 
 #define TWITTER_POLL_INTERVAL_SEC 60.0
 
@@ -98,8 +99,9 @@ NSTimer *pullNewTweetsTimer;
 - (void) fetchAndLoadTweets
 {
     NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"since_id": [self mostRecentTweetId]};
-    
+    [NetworkActivityIndicator show];
     [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
+        [NetworkActivityIndicator hide];
         [self.managedContext performBlock:^{
             [self loadTweetsFromTweetsDict:tweetsData];
         }];
@@ -171,7 +173,9 @@ bool loading = false;
     if (lastTweetId)
     {
         NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"max_id": lastTweetId};
+        [NetworkActivityIndicator show];
         [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
+            [NetworkActivityIndicator hide];
             [self.managedContext performBlock:^(void){
                 [self loadTweetsFromTweetsDict:tweetsData];
                 loading = false;

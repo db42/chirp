@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A0432841841F8D400DBE006 /* testimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3A0432831841F8D400DBE006 /* testimage.jpeg */; };
 		3A04328718433F1100DBE006 /* CoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A04328618433F1100DBE006 /* CoreDataViewController.m */; };
+		3A04328A1844AC6100DBE006 /* NetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0432891844AC6100DBE006 /* NetworkActivityIndicator.m */; };
 		3A16F9BD183352E70011D02B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BC183352E70011D02B /* Foundation.framework */; };
 		3A16F9BF183352E70011D02B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9BE183352E70011D02B /* CoreGraphics.framework */; };
 		3A16F9C1183352E70011D02B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9C0183352E70011D02B /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 		3A0432831841F8D400DBE006 /* testimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testimage.jpeg; path = ../../../Desktop/testimage.jpeg; sourceTree = "<group>"; };
 		3A04328518433F1100DBE006 /* CoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataViewController.h; sourceTree = "<group>"; };
 		3A04328618433F1100DBE006 /* CoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataViewController.m; sourceTree = "<group>"; };
+		3A0432881844AC6100DBE006 /* NetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkActivityIndicator.h; sourceTree = "<group>"; };
+		3A0432891844AC6100DBE006 /* NetworkActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivityIndicator.m; sourceTree = "<group>"; };
 		3A16F9B9183352E70011D02B /* chirp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A16F9BC183352E70011D02B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A16F9BE183352E70011D02B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -158,6 +161,8 @@
 				3A16F9CB183352E70011D02B /* AppDelegate.h */,
 				3A16F9CC183352E70011D02B /* AppDelegate.m */,
 				3A16F9CE183352E70011D02B /* Main.storyboard */,
+				3A0432881844AC6100DBE006 /* NetworkActivityIndicator.h */,
+				3A0432891844AC6100DBE006 /* NetworkActivityIndicator.m */,
 				3A7CBB6B1838A0510023E5DF /* TweetVC.h */,
 				3AC799DF183C748400A65C98 /* ProfileVC.h */,
 				3AC799E0183C748400A65C98 /* ProfileVC.m */,
@@ -340,6 +345,7 @@
 				3A04328718433F1100DBE006 /* CoreDataViewController.m in Sources */,
 				3AC799F3183C8C2300A65C98 /* Tweet.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,
+				3A04328A1844AC6100DBE006 /* NetworkActivityIndicator.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
 				3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */,
 			);
