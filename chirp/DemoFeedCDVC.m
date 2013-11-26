@@ -40,8 +40,14 @@
         [self initManagedContext];
         
         //load tweets
-        [self refreshView];
+//        [self refreshView];
     }
+}
+
+- (void)setManagedContext:(NSManagedObjectContext *)managedContext
+{
+    [super setManagedContext: managedContext];
+    [self refreshView];
 }
 
 - (void) initManagedContext
@@ -87,23 +93,40 @@
 
 - (void) fetchAndLoadTweets
 {
-    [self.tweetFetcher fetchTweets:20 withCallBackBlock:^(NSArray *tweetsData) {
+    NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"since_id": [self mostRecentTweetId]};
+    
+    [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
         [self.managedContext performBlock:^{
             [self loadTweetsFromTweetsDict:tweetsData];
         }];
     }];
 }
 
+- (NSString *) mostRecentTweetId
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    if (!self.resultController)
+    {
+        return nil;
+    }
+    Tweet *mostRecentTweet =[self.resultController objectAtIndexPath:indexPath];
+    if (mostRecentTweet)
+        return mostRecentTweet.id_str;
+    else
+        return nil;
+}
+
 - (void)loadTweetsFromTweetsDict:(NSArray *)tweetsData
 {
-            for (NSDictionary *data in tweetsData)
-            {
-                Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
-                
-                NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
-                //        NSError *error = nil;
-                //        [self.managedContext save:&error];
-            }
+    for (NSDictionary *data in tweetsData)
+    {
+        Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
+        
+        NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
+        //        NSError *error = nil;
+        //        [self.managedContext save:&error];
+    }
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [self.refreshController endRefreshing];
     });
@@ -135,7 +158,8 @@ bool loading = false;
     NSString *lastTweetId = lastTweet.id_str;
     if (lastTweetId)
     {
-        [self.tweetFetcher fetchPreviousTweets:20 withId:lastTweetId withCallBackBlock:^(NSArray *tweetsData) {
+        NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"max_id": lastTweetId};
+        [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
             [self.managedContext performBlock:^(void){
                 [self loadTweetsFromTweetsDict:tweetsData];
                 loading = false;

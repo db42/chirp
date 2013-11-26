@@ -78,18 +78,8 @@
      }];
 }
 
--(void)fetchTweets:(int)count withCallBackBlock:(void (^)(NSArray * tweetsData))callBackBlock
+-(void)fetchTweetsWithParams:(NSDictionary *)params withCallBackBlock:(void (^)(NSArray * tweetsData))callBackBlock
 {
-    NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20"};
-    
     [self fetchTweetsWithParams:callBackBlock params:params];
 }
-
-- (void)fetchPreviousTweets:(int)count withId:(NSString *)id withCallBackBlock:(void (^)(NSArray *))callBackBlock
-{
-    NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": [NSString stringWithFormat:@"%d", count], @"max_id": id};
-    
-    [self fetchTweetsWithParams:callBackBlock params:params];
-}
-
 @end

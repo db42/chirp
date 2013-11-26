@@ -11,7 +11,6 @@
 @interface TwitterFetcher : NSObject
 
 - (void) fetchUserWithScreenName: (NSString *)screenName withCallBackBlock:(void (^)(NSDictionary * tweetsData))callBackBlock;
-- (void) fetchTweets: (int)count withCallBackBlock:(void (^)(NSArray *tweetsData))callBackBlock;
-- (void) fetchPreviousTweets:(int)count withId:(NSString *)id withCallBackBlock:(void (^)(NSArray *tweetsData))callBackBlock;
+- (void) fetchTweetsWithParams: (NSDictionary *)params withCallBackBlock:(void (^)(NSArray *tweetsData))callBackBlock;
 
 @end
