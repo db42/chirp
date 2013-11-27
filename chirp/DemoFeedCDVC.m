@@ -98,7 +98,12 @@ NSTimer *pullNewTweetsTimer;
 
 - (void) fetchAndLoadTweets
 {
-    NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"since_id": [self mostRecentTweetId]};
+    NSDictionary *params;
+    if ([self mostRecentTweetId])
+        params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"since_id": [self mostRecentTweetId]};
+    else
+        params = @{@"screen_name": @"dushyant_db", @"count": @"20"};
+        
     [NetworkActivityIndicator show];
     [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
         [NetworkActivityIndicator hide];
@@ -116,11 +121,15 @@ NSTimer *pullNewTweetsTimer;
     {
         return nil;
     }
-    Tweet *mostRecentTweet =[self.resultController objectAtIndexPath:indexPath];
-    if (mostRecentTweet)
-        return mostRecentTweet.id_str;
-    else
+    
+    if ([[self.resultController fetchedObjects] count])
+    {
+        Tweet *mostRecentTweet =[self.resultController objectAtIndexPath:indexPath];
+        if (mostRecentTweet)
+            return mostRecentTweet.id_str;
         return nil;
+    }
+    return nil;
 }
 
 - (void)loadTweetsFromTweetsDict:(NSArray *)tweetsData
