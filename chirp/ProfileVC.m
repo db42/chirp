@@ -33,41 +33,12 @@
     return _tweetFetcher;
 }
 
-- (void) initUser
-{
-        //fetch from db
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        request.predicate = [NSPredicate predicateWithFormat:@"screen_name == %@", self.userScreenName];
-        
-        NSError *error;
-        NSArray *resultUsers = [self.managedContext executeFetchRequest:request error:&error];
-        
-        if (resultUsers != nil && resultUsers.count == 1)
-        {
-            self.user = [resultUsers lastObject];
-        }
-        else
-        {
-            //fetch from twitterFetcher
-            [self.tweetFetcher fetchUserWithScreenName:self.userScreenName withCallBackBlock:^(NSDictionary *tweetData){
-                self.user = [User initWithDict:tweetData withManagedContext:self.managedContext];
-//                NSLog("%@", tweetData);
-            }];
-            
-        }
-}
 - (void)setUser:(User *)user
 {
     _user = user;
     dispatch_async(dispatch_get_main_queue(), ^(void){
     [self refresh];
     });
-}
-
-- (void)setUserScreenName:(NSString *)userScreenName
-{
-    _userScreenName = userScreenName;
-    [self initUser];
 }
 
 - (void)refresh
@@ -111,30 +82,39 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self refresh];
-    
-//    self.tweetsCount setTitle:@"" forState:
-    
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.userScreenName = @"dushyant_db";
+    [self initUser];
 }
 
-- (void)didReceiveMemoryWarning
+- (void) initUser
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+        //fetch from db
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        request.predicate = [NSPredicate predicateWithFormat:@"screen_name == %@", self.userScreenName];
+        
+        NSError *error;
+        NSArray *resultUsers = [self.managedContext executeFetchRequest:request error:&error];
+        
+        if (resultUsers != nil && resultUsers.count == 1)
+        {
+            self.user = [resultUsers lastObject];
+        }
+        else
+        {
+            //fetch from twitterFetcher
+            [self.tweetFetcher fetchUserWithScreenName:self.userScreenName withCallBackBlock:^(NSDictionary *tweetData){
+                self.user = [User initWithDict:tweetData withManagedContext:self.managedContext];
+//                NSLog("%@", tweetData);
+            }];
+            
+        }
 }
 
 @end

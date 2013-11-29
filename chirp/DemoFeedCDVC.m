@@ -17,6 +17,7 @@
 #import "TwitterFetcher.h"
 #import "ProfileVC.h"
 #import "NetworkActivityIndicator.h"
+#import "Manager.h"
 
 #define TWITTER_POLL_INTERVAL_SEC 60.0
 
@@ -42,54 +43,27 @@ NSTimer *pullNewTweetsTimer;
 {
     if (!self.managedContext)
     {
-        [self initManagedContext];
+//        [self initManagedContext];
         
         //load tweets
-//        [self refreshView];
+        [self refreshView];
     }
 }
 
 - (void)setManagedContext:(NSManagedObjectContext *)managedContext
 {
     [super setManagedContext: managedContext];
-    [self refreshView];
+//    [self refreshView];
 }
 
-- (void) initManagedContext
-{
-    if (!self.managedContext)
-    {
-        NSURL *fileUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        
-        fileUrl = [fileUrl URLByAppendingPathComponent:@"demo doc"];
-        UIManagedDocument *document= [[UIManagedDocument alloc] initWithFileURL:fileUrl];
-        
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[fileUrl path]])
-        {
-            [document saveToURL:fileUrl
-               forSaveOperation:UIDocumentSaveForCreating
-              completionHandler:^(BOOL success){
-                if (success)
-                {
-                    self.managedContext = document.managedObjectContext;
-                }
-            }];
-        }
-        else if (document.documentState == UIDocumentStateClosed)
-        {
-            [document openWithCompletionHandler:^(BOOL success){
-                if (success)
-                {
-                    self.managedContext = document.managedObjectContext;
-                }
-            }];
-        }
-        else
-        {
-            self.managedContext = document.managedObjectContext;
-        }
-    }
-}
+//- (void) initManagedContext
+//{
+//    if (!self.managedContext)
+//    {
+//        Manager *manager = [Manager sharedInstance];
+//        self.managedContext = manager.managedContext;
+//    }
+//}
 
 - (IBAction)refreshView {
     [self.refreshController beginRefreshing];
