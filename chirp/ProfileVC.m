@@ -68,14 +68,16 @@
         self.nameView.text = self.user.name;
         self.screenNameView.text = self.user.screen_name;
         
-        self.followersCountButton.titleLabel.text = [NSString stringWithFormat:@"%@ tweets", self.user.followers_count];
-        self.followersCountButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        //set buttons title
+        [self.followersCountButton setTitle: [NSString stringWithFormat:@"%@ followers", self.user.followers_count] forState:UIControlStateNormal];
         
-        self.friendsCount.titleLabel.text = [NSString stringWithFormat:@"%@ friends", self.user.friends_count];
-        self.friendsCount.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.friendsCount setTitle: [NSString stringWithFormat:@"%@ friends", self.user.friends_count] forState:UIControlStateNormal];
         
-        self.tweetsCount.titleLabel.text = [NSString stringWithFormat:@"%@ friends", self.user.statuses_count];
-        self.tweetsCount.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.tweetsCount setTitle: [NSString stringWithFormat:@"%@ tweets", self.user.statuses_count] forState:UIControlStateNormal];
+        
+        
+        //load tweets
+        
     }
 }
 

@@ -50,9 +50,7 @@
                             <outlet property="delegate" destination="pUm-iQ-kID" id="wqM-cW-hDs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zwv-tm-epj">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="6di-dV-4TV"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="zwv-tm-epj"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="3Ah-Uv-BnD">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -213,7 +211,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="aEt-6o-rT8"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="User-Profile-48" id="aEt-6o-rT8"/>
                     <navigationItem key="navigationItem" id="gV3-fU-ksy"/>
                     <connections>
                         <outlet property="contentsTable" destination="ygX-dt-0fr" id="GdK-Dn-ECg"/>
@@ -234,7 +232,7 @@
         <scene sceneID="7vn-dU-RAF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Cx-nH-drV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="FKv-6g-oKg"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="Home-48" id="FKv-6g-oKg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O8i-E2-bX1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -251,6 +249,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home-48" width="48" height="48"/>
+        <image name="User-Profile-48" width="48" height="48"/>
         <image name="testimage.jpeg" width="48" height="48"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
