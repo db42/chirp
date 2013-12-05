@@ -39,6 +39,36 @@ NSTimer *pullNewTweetsTimer;
     return _tweetFetcher;
 }
 
+- (void)storeAccessToken:(NSString *)accessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:accessToken forKey:@"access_token"];
+    [userDefaults synchronize];
+}
+
+- (NSString *)loadAccessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"access_token"];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([self loadAccessToken])
+        return;
+    
+    NSString *consumerKey = @"HdYpIQHu000GiSJ0SPGGw";
+    NSString *secretKey = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqmtssrThY";
+    
+    [[FHSTwitterEngine sharedEngine] permanentlySetConsumerKey:consumerKey andSecret:secretKey];
+    [[FHSTwitterEngine sharedEngine]setDelegate:self];
+    
+    UIViewController *loginController = [[FHSTwitterEngine sharedEngine] loginControllerWithCompletionHandler:^(BOOL success){
+//        [self presentViewController:loginController animated:YES completion:nil];
+     NSLog(@"completed");
+    }];
+    
+    [self presentViewController:loginController animated:YES completion:nil];
+}
 - (void)viewDidLoad
 {
     if (!self.managedContext)

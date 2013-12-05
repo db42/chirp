@@ -19,15 +19,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    
-    UINavigationController *navigationController = tabBarController.viewControllers[0];
-    DemoFeedCDVC *controller = (DemoFeedCDVC *)navigationController.topViewController;
-    controller.managedContext = self.managedObjectContext;
-    
-    navigationController = tabBarController.viewControllers[1];
-    ProfileVC *profileVC =(ProfileVC *)navigationController.topViewController;
-    profileVC.managedContext = self.managedObjectContext;
+//    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+//    
+//    UINavigationController *navigationController = tabBarController.viewControllers[0];
+//    DemoFeedCDVC *controller = (DemoFeedCDVC *)navigationController.topViewController;
+//    controller.managedContext = self.managedObjectContext;
+//    
+//    navigationController = tabBarController.viewControllers[1];
+//    ProfileVC *profileVC =(ProfileVC *)navigationController.topViewController;
+//    profileVC.managedContext = self.managedObjectContext;
     
     return YES;
 }

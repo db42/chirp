@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FHSTwitterEngine.h"
 
-@interface SignInViewController : UIViewController
+@interface SignInViewController : UIViewController<FHSTwitterEngineAccessTokenDelegate>
 
 @end

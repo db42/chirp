@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import "AFNetworking.h"
 
+
 @interface SignInViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
@@ -16,23 +17,51 @@
 
 @implementation SignInViewController
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)storeAccessToken:(NSString *)accessToken
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:accessToken forKey:@"access_token"];
+    [userDefaults synchronize];
+}
+
+- (NSString *)loadAccessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"access_token"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([self loadAccessToken])
+        return;
     
-    NSString *uri = @"https://api.twitter.com/oauth/request_token";
-    NSString *callbackUri = @"https://api.twitter.com/oauth/authenticate";
     NSString *consumerKey = @"HdYpIQHu000GiSJ0SPGGw";
+    NSString *secretKey = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqmtssrThY";
     
-    NSDictionary *params = @{@"oauth_callback": callbackUri, @"oauth_consumer_key": consumerKey};
+    [[FHSTwitterEngine sharedEngine] permanentlySetConsumerKey:consumerKey andSecret:secretKey];
+    [[FHSTwitterEngine sharedEngine]setDelegate:self];
     
-    [manager POST:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){} failure:^(AFHTTPRequestOperation *operation, NSError *error){}];
+    UIViewController *loginController = [[FHSTwitterEngine sharedEngine] loginControllerWithCompletionHandler:^(BOOL success){
+//        [self presentViewController:loginController animated:YES completion:nil];
+     NSLog(@"completed");
+    }];
     
+    [self presentViewController:loginController animated:YES completion:nil];
     
-    NSURL *url = [[NSURL alloc] initWithString:uri];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    [self.webView loadRequest:request];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    
+//    NSString *uri = @"https://api.twitter.com/oauth/request_token";
+//    NSString *callbackUri = @"https://api.twitter.com/oauth/authenticate";
+//    
+//    NSDictionary *params = @{@"oauth_callback": callbackUri, @"oauth_consumer_key": consumerKey};
+//    
+//    [manager POST:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){} failure:^(AFHTTPRequestOperation *operation, NSError *error){}];
+//    
+//    
+//    NSURL *url = [[NSURL alloc] initWithString:uri];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    
+//    [self.webView loadRequest:request];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

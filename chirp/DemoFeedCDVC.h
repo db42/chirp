@@ -7,7 +7,8 @@
 //
 
 #import "FeedCDVC.h"
+#import "FHSTwitterEngine.h"
 
-@interface DemoFeedCDVC : FeedCDVC
+@interface DemoFeedCDVC : FeedCDVC<FHSTwitterEngineAccessTokenDelegate>
 
 @end
