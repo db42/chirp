@@ -20,12 +20,13 @@
 {
     // Override point for customization after application launch.
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    UINavigationController *navigationController = tabBarController.viewControllers[0];
     
+    UINavigationController *navigationController = tabBarController.viewControllers[0];
     DemoFeedCDVC *controller = (DemoFeedCDVC *)navigationController.topViewController;
     controller.managedContext = self.managedObjectContext;
     
-    ProfileVC *profileVC = tabBarController.viewControllers[1];
+    navigationController = tabBarController.viewControllers[1];
+    ProfileVC *profileVC =(ProfileVC *)navigationController.topViewController;
     profileVC.managedContext = self.managedObjectContext;
     
     return YES;

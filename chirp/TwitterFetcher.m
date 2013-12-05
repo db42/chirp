@@ -82,4 +82,35 @@
 {
     [self fetchTweetsWithParams:callBackBlock params:params];
 }
+
+- (void)postTweetWithParams:(NSDictionary *)params withCallBack:(void (^)(NSDictionary *))callBack
+{
+    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [self.accountStore requestAccessToAccountsWithType:twitterAccountType options:NULL completion:^(BOOL granted, NSError *error)
+     {
+         if (granted)
+         {
+             NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json" relativeToURL:Nil];
+             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:feedUrl parameters:params];
+             
+             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
+             
+             [request setAccount:[twitterAccounts lastObject]];
+             
+             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 if (responseData && urlResponse.statusCode == 200)
+                 {
+                     NSError *err;
+                     NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
+                     callBack(feedDict);
+                 }
+             }];
+             
+         }
+     }];
+    
+}
+
 @end

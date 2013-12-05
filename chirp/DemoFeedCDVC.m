@@ -170,14 +170,14 @@ bool loading = false;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [super prepareForSegue:segue sender:sender];
-    if ([segue.identifier isEqualToString:@"setUserScreenName"])
+    if ([segue.identifier isEqualToString:@"setManagedContext"])
     {
         id destController = [segue destinationViewController];
-        if ([destController respondsToSelector:@selector(setUserScreenName:)])
+        if ([destController respondsToSelector:@selector(setManagedContext:)])
         {
-            [destController performSelector:@selector(setUserScreenName:) withObject:@"dushyant_db"];
             [destController performSelector:@selector(setManagedContext:) withObject:self.managedContext];
         }
     }
 }
+
 @end
