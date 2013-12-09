@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    NSURL *url = [NSURL URLWithString:self.tweet.composer.profile_image_url];
+    NSURL *url = [NSURL URLWithString:self.tweet.composer.profileImageUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     
     UIImage *image = [UIImage imageWithData:data];
@@ -52,7 +52,7 @@
     }
 	// Do any additional setup after loading the view.
     self.tweetComposerName.text = self.tweet.composer.name;
-    self.tweetComposerScreenName.text = self.tweet.composer.screen_name;
+    self.tweetComposerScreenName.text = self.tweet.composer.screenName;
     self.tweetText.text = self.tweet.text;
     
 }

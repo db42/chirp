@@ -13,14 +13,14 @@
 
 @interface User : NSManagedObject
 
-@property (nonatomic, retain) NSString * id_str;
+@property (nonatomic, retain) NSString * idString;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * screen_name;
-@property (nonatomic, retain) NSNumber * statuses_count;
-@property (nonatomic, retain) NSNumber * friends_count;
-@property (nonatomic, retain) NSNumber * followers_count;
-@property (nonatomic, retain) NSString * profile_image_url;
-@property (nonatomic, retain) NSString * profile_background_image_url;
+@property (nonatomic, retain) NSString * screenName;
+@property (nonatomic, retain) NSNumber * statusesCount;
+@property (nonatomic, retain) NSNumber * friendsCount;
+@property (nonatomic, retain) NSNumber * followersCount;
+@property (nonatomic, retain) NSString * profileImageUrl;
+@property (nonatomic, retain) NSString * profileBackgroundImageUrl;
 @property (nonatomic, retain) NSSet *tweets;
 @end
 

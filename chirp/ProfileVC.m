@@ -45,7 +45,7 @@
 {
     if (self.user)
     {
-        NSURL *url = [NSURL URLWithString:self.user.profile_background_image_url];
+        NSURL *url = [NSURL URLWithString:self.user.profileBackgroundImageUrl];
         NSData *data = [NSData dataWithContentsOfURL:url];
         
         UIImage *image = [UIImage imageWithData:data];
@@ -55,7 +55,7 @@
             self.profileBackgroundImageView.image = image;
         }
         
-        url = [NSURL URLWithString:self.user.profile_image_url];
+        url = [NSURL URLWithString:self.user.profileImageUrl];
         data = [NSData dataWithContentsOfURL:url];
         
         image = [UIImage imageWithData:data];
@@ -66,14 +66,14 @@
         }
         
         self.nameView.text = self.user.name;
-        self.screenNameView.text = self.user.screen_name;
+        self.screenNameView.text = self.user.screenName;
         
         //set buttons title
-        [self.followersCountButton setTitle: [NSString stringWithFormat:@"%@ followers", self.user.followers_count] forState:UIControlStateNormal];
+        [self.followersCountButton setTitle: [NSString stringWithFormat:@"%@ followers", self.user.followersCount] forState:UIControlStateNormal];
         
-        [self.friendsCount setTitle: [NSString stringWithFormat:@"%@ friends", self.user.friends_count] forState:UIControlStateNormal];
+        [self.friendsCount setTitle: [NSString stringWithFormat:@"%@ friends", self.user.friendsCount] forState:UIControlStateNormal];
         
-        [self.tweetsCount setTitle: [NSString stringWithFormat:@"%@ tweets", self.user.statuses_count] forState:UIControlStateNormal];
+        [self.tweetsCount setTitle: [NSString stringWithFormat:@"%@ tweets", self.user.statusesCount] forState:UIControlStateNormal];
         
         
         //load tweets

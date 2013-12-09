@@ -12,7 +12,7 @@
 
 @implementation Tweet
 
-@dynamic id_str;
+@dynamic idString;
 @dynamic text;
 @dynamic composer;
 

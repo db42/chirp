@@ -13,7 +13,7 @@
 
 @interface Tweet : NSManagedObject
 
-@property (nonatomic, retain) NSString * id_str;
+@property (nonatomic, retain) NSString * idString;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) User *composer;
 

@@ -140,7 +140,7 @@ NSTimer *pullNewTweetsTimer;
     {
         Tweet *mostRecentTweet =[self.resultController objectAtIndexPath:indexPath];
         if (mostRecentTweet)
-            return mostRecentTweet.id_str;
+            return mostRecentTweet.idString;
         return nil;
     }
     return nil;
@@ -152,7 +152,7 @@ NSTimer *pullNewTweetsTimer;
     {
         Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
         
-        NSLog(@"tweet parsing - %@ %@ %@", tweet.id_str, tweet.text, tweet.composer.name);
+        NSLog(@"tweet parsing - %@ %@ %@", tweet.idString, tweet.text, tweet.composer.name);
         //        NSError *error = nil;
         //        [self.managedContext save:&error];
     }
@@ -192,7 +192,7 @@ bool loading = false;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
     
     Tweet *lastTweet =[self.resultController objectAtIndexPath:indexPath];
-    NSString *lastTweetId = lastTweet.id_str;
+    NSString *lastTweetId = lastTweet.idString;
     if (lastTweetId)
     {
         NSDictionary *params = @{@"count": @"20", @"max_id": lastTweetId};

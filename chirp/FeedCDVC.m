@@ -76,7 +76,7 @@
     
     Tweet *tweet = [self.resultController objectAtIndexPath:indexPath];
     
-    NSURL *url = [NSURL URLWithString:tweet.composer.profile_image_url];
+    NSURL *url = [NSURL URLWithString:tweet.composer.profileImageUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     
     UIImage *image = [UIImage imageWithData:data];

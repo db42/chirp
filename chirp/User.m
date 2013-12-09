@@ -12,14 +12,14 @@
 
 @implementation User
 
-@dynamic id_str;
+@dynamic idString;
 @dynamic name;
-@dynamic screen_name;
-@dynamic statuses_count;
-@dynamic friends_count;
-@dynamic followers_count;
-@dynamic profile_image_url;
-@dynamic profile_background_image_url;
+@dynamic screenName;
+@dynamic statusesCount;
+@dynamic friendsCount;
+@dynamic followersCount;
+@dynamic profileImageUrl;
+@dynamic profileBackgroundImageUrl;
 @dynamic tweets;
 
 @end
