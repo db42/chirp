@@ -14,21 +14,22 @@
 + (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
 {
     NSString *tweetId = [data objectForKey:@"id_str"];
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
-    request.predicate = [NSPredicate predicateWithFormat:@"id_str = %@", tweetId];
-    request.sortDescriptors = Nil;
+    request.predicate = [NSPredicate predicateWithFormat:@"idString = %@", tweetId];
+    request.sortDescriptors = nil;
     
     NSError *error;
-    NSArray *tweetsArray = [managedContext executeFetchRequest:request error:&error];
+    NSArray *tweetsFromDB = [managedContext executeFetchRequest:request error:&error];
     
     Tweet *tweet;
     //if error
-    if (!tweetsArray || [tweetsArray count] > 1)
+    if (!tweetsFromDB || [tweetsFromDB count] > 1)
     {
         NSLog(@"error %@", error);
     }
     //not present in core data
-    else if (![tweetsArray count])
+    else if (![tweetsFromDB count])
     {
         //store in db
         tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:managedContext];
@@ -45,7 +46,7 @@
     //if present in core data
     else
     {
-        tweet =  [tweetsArray lastObject];
+        tweet =  [tweetsFromDB lastObject];
     }
     return tweet;
 }

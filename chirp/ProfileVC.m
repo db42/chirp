@@ -99,7 +99,7 @@
 {
         //fetch from db
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-        request.predicate = [NSPredicate predicateWithFormat:@"screen_name == %@", self.userScreenName];
+        request.predicate = [NSPredicate predicateWithFormat:@"screenName == %@", self.userScreenName];
         
         NSError *error;
         NSArray *resultUsers = [self.managedContext executeFetchRequest:request error:&error];
