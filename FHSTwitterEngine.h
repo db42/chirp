@@ -309,8 +309,9 @@ extern NSString * const FHSErrorDomain;
 // 100 ids/usernames per concatenated string
 - (NSArray *)generateRequestStringsFromArray:(NSArray *)array;
 
+- (NSString *)genAuthHeader:(NSMutableURLRequest *)request verifierString:(NSString *)verifierString tokenString:(NSString *)tokenString tokenSecretString:(NSString *)tokenSecretString;
 // never call -[FHSTwitterEngine init] directly
-+ (FHSTwitterEngine *)sharedEngine; 
++ (FHSTwitterEngine *)sharedEngine;
 
 + (BOOL)isConnectedToInternet;
 

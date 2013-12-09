@@ -35,49 +35,67 @@ NSTimer *pullNewTweetsTimer;
 
 - (TwitterFetcher *)tweetFetcher
 {
-    if (!_tweetFetcher) _tweetFetcher = [[TwitterFetcher alloc] init];
+    if (!_tweetFetcher) _tweetFetcher = [[TwitterFetcher alloc] initWithAuthToken:[self loadOauthToken]];
     return _tweetFetcher;
+}
+
+- (void)extractOauthToken:(NSString *)accessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *keyPairs = [accessToken componentsSeparatedByString:@"&"];
+    for (NSString *keyPair in keyPairs) {
+        NSArray *keyValueArray = [keyPair componentsSeparatedByString:@"="];
+        [userDefaults setObject:keyValueArray[1] forKey:keyValueArray[0]];
+    }
+    [userDefaults synchronize];
 }
 
 - (void)storeAccessToken:(NSString *)accessToken
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:accessToken forKey:@"access_token"];
+    [userDefaults setObject:accessToken forKey:@"access_token_object"];
     [userDefaults synchronize];
+    
+    [self extractOauthToken:accessToken];
 }
 
 - (NSString *)loadAccessToken
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"access_token"];
+    return [userDefaults objectForKey:@"access_token_object"];
 }
+
+- (NSString *)loadOauthToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"oauth_token"];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     if ([self loadAccessToken])
         return;
     
+    UIViewController *loginController = [[FHSTwitterEngine sharedEngine] loginControllerWithCompletionHandler:^(BOOL success){
+         NSLog(@"completed");
+        [self refreshView];
+    }];
+    
+    [self presentViewController:loginController animated:YES completion:nil];
+}
+
+- (void)viewDidLoad
+{
     NSString *consumerKey = @"HdYpIQHu000GiSJ0SPGGw";
     NSString *secretKey = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqmtssrThY";
     
     [[FHSTwitterEngine sharedEngine] permanentlySetConsumerKey:consumerKey andSecret:secretKey];
     [[FHSTwitterEngine sharedEngine]setDelegate:self];
     
-    UIViewController *loginController = [[FHSTwitterEngine sharedEngine] loginControllerWithCompletionHandler:^(BOOL success){
-//        [self presentViewController:loginController animated:YES completion:nil];
-     NSLog(@"completed");
-    }];
-    
-    [self presentViewController:loginController animated:YES completion:nil];
-}
-- (void)viewDidLoad
-{
-    if (!self.managedContext)
-    {
-//        [self initManagedContext];
-        
-        //load tweets
+//    if (!self.managedContext)
+//    {
         [self refreshView];
-    }
+//    }
 }
 
 - (void)setManagedContext:(NSManagedObjectContext *)managedContext
@@ -85,15 +103,6 @@ NSTimer *pullNewTweetsTimer;
     [super setManagedContext: managedContext];
 //    [self refreshView];
 }
-
-//- (void) initManagedContext
-//{
-//    if (!self.managedContext)
-//    {
-//        Manager *manager = [Manager sharedInstance];
-//        self.managedContext = manager.managedContext;
-//    }
-//}
 
 - (IBAction)refreshView {
     [self.refreshController beginRefreshing];

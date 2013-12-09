@@ -1494,8 +1494,7 @@ id removeNull(id rootObject) {
     [self signRequest:request withToken:_accessToken.key tokenSecret:_accessToken.secret verifier:nil];
 }
 
-- (void)signRequest:(NSMutableURLRequest *)request withToken:(NSString *)tokenString tokenSecret:(NSString *)tokenSecretString verifier:(NSString *)verifierString {
-    
+- (NSString *)genAuthHeader:(NSMutableURLRequest *)request verifierString:(NSString *)verifierString tokenString:(NSString *)tokenString tokenSecretString:(NSString *)tokenSecretString {
     NSString *consumerKey = [_consumer.key fhs_URLEncode];
     NSString *nonce = [NSString fhs_UUID];
     NSString *timestamp = [NSString stringWithFormat:@"%ld",time(nil)];
@@ -1556,13 +1555,20 @@ id removeNull(id rootObject) {
     unsigned char result[20];
 	CCHmac(kCCHmacAlgSHA1, secretData.bytes, secretData.length, clearTextData.bytes, clearTextData.length, result);
     NSData *theData = [[[NSData dataWithBytes:result length:20]base64Encode]dataUsingEncoding:NSUTF8StringEncoding];
-
+    
     NSString *signature = [[[NSString alloc]initWithData:theData encoding:NSUTF8StringEncoding]fhs_URLEncode];
     
 	NSString *oauthToken = (tokenString.length > 0)?[NSString stringWithFormat:@"oauth_token=\"%@\", ",[tokenString fhs_URLEncode]]:@"oauth_callback=\"oob\", ";
     NSString *oauthVerifier = (verifierString.length > 0)?[NSString stringWithFormat:@"oauth_verifier=\"%@\", ",verifierString]:@"";
-
+    
     NSString *oauthHeader = [NSString stringWithFormat:@"OAuth oauth_consumer_key=\"%@\", %@%@oauth_signature_method=\"HMAC-SHA1\", oauth_signature=\"%@\", oauth_timestamp=\"%@\", oauth_nonce=\"%@\", oauth_version=\"1.0\"",consumerKey,oauthToken,oauthVerifier,signature,timestamp,nonce];
+    return oauthHeader;
+}
+
+- (void)signRequest:(NSMutableURLRequest *)request withToken:(NSString *)tokenString tokenSecret:(NSString *)tokenSecretString verifier:(NSString *)verifierString {
+    
+    NSString *oauthHeader;
+    oauthHeader = [self genAuthHeader:request verifierString:verifierString tokenString:tokenString tokenSecretString:tokenSecretString];
     
     [request setValue:oauthHeader forHTTPHeaderField:@"Authorization"];
 }
