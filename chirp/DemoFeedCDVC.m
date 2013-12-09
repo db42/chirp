@@ -35,7 +35,7 @@ NSTimer *pullNewTweetsTimer;
 
 - (TwitterFetcher *)tweetFetcher
 {
-    if (!_tweetFetcher) _tweetFetcher = [[TwitterFetcher alloc] initWithAuthToken:[self loadOauthToken]];
+    if (!_tweetFetcher) _tweetFetcher = [[TwitterFetcher alloc] init];
     return _tweetFetcher;
 }
 
@@ -92,9 +92,10 @@ NSTimer *pullNewTweetsTimer;
     [[FHSTwitterEngine sharedEngine] permanentlySetConsumerKey:consumerKey andSecret:secretKey];
     [[FHSTwitterEngine sharedEngine]setDelegate:self];
     
+//   [self refreshView];
+    
 //    if (!self.managedContext)
 //    {
-        [self refreshView];
 //    }
 }
 
@@ -113,9 +114,9 @@ NSTimer *pullNewTweetsTimer;
 {
     NSDictionary *params;
     if ([self mostRecentTweetId])
-        params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"since_id": [self mostRecentTweetId]};
+        params = @{@"count": @"20", @"since_id": [self mostRecentTweetId]};
     else
-        params = @{@"screen_name": @"dushyant_db", @"count": @"20"};
+        params = @{@"count": @"20"};
         
     [NetworkActivityIndicator show];
     [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
@@ -194,7 +195,7 @@ bool loading = false;
     NSString *lastTweetId = lastTweet.id_str;
     if (lastTweetId)
     {
-        NSDictionary *params = @{@"screen_name": @"dushyant_db", @"count": @"20", @"max_id": lastTweetId};
+        NSDictionary *params = @{@"count": @"20", @"max_id": lastTweetId};
         [NetworkActivityIndicator show];
         [self.tweetFetcher fetchTweetsWithParams:params withCallBackBlock:^(NSArray *tweetsData) {
             [NetworkActivityIndicator hide];

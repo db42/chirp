@@ -10,11 +10,8 @@
 #import "AFNetworking.h"
 #import "FHSTwitterEngine.h"
 
-#import <Social/Social.h>
-#import <Accounts/Accounts.h>
 
 @interface TwitterFetcher()
-@property (nonatomic) ACAccountStore *accountStore;
 @property (strong, nonatomic) NSString *authToken;
 @property (strong, nonatomic) NSString *tokenSecret;
 @end
@@ -31,6 +28,12 @@
     return self;
 }
 
+- (NSString *)authToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"oauth_token"];
+}
+
 - (NSString *)tokenSecret
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -38,36 +41,30 @@
     return tokenSecret;
 }
 
-- (ACAccountStore *)accountStore
-{
-    if (!_accountStore)
-    {
-        _accountStore = [[ACAccountStore alloc] init];
-    }
-    return _accountStore;
-}
-
 - (void) fetchUserWithScreenName: (NSString *)screenName withCallBackBlock:(void (^)(NSDictionary * tweetsData))callBackBlock
 {
-    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json" relativeToURL:Nil];
-    
     NSDictionary *params = @{@"screen_name": @"dushyant_db"};
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:feedUrl parameters:params];
-             
-             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
-             
-             [request setAccount:[twitterAccounts lastObject]];
-             
-             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                 
-                 if (responseData && urlResponse.statusCode == 200)
-                 {
-                     NSError *err;
-                     NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
-                     callBackBlock(feedDict);
-                 }
-                }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+    NSString *uri = @"https://api.twitter.com/1.1/users/show.json";
+    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+    
+    NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
+    
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+    [manager GET:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if (operation.responseData && operation.response.statusCode == 200)
+        {
+            NSError *err;
+            NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:&err];
+            callBackBlock(userData);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
+        NSLog(@"%@", a);
+    }];
 }
 
 //- (NSString *) genAuthHeader
@@ -81,19 +78,35 @@
 //    return authHeader;
 //}
 
+- (NSString *)composeUri:(NSString *)uri withParams:(NSDictionary *)params
+{
+    if ([uri rangeOfString:@"?"].location == NSNotFound)
+    {
+        uri = [uri stringByAppendingString:@"?"];
+    }
+    
+//    NSString *queryString = [[NSString alloc] init];
+    for (NSString *key in params.allKeys) {
+        NSString *prefix = ([uri hasSuffix:@"?"] || [uri hasSuffix:@"&"]) ? @"" : @"&";
+            
+        uri = [uri stringByAppendingString:[NSString stringWithFormat:@"%@%@=%@",prefix, key, params[key]]];
+    }
+    return uri;
+}
+
 - (void)fetchTweetsWithParams:(void (^)(NSArray *))callBackBlock params:(NSDictionary *)params
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-    
     NSString *uri = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uri]];
+    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
     
     NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
     
     [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
     
-    [manager GET:uri parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [manager GET:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if (operation.responseData && operation.response.statusCode == 200)
         {
             NSError *err;
@@ -105,33 +118,6 @@
         NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
         NSLog(@"%@", a);
     }];
-
-    
-//    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-//    
-//    [self.accountStore requestAccessToAccountsWithType:twitterAccountType options:NULL completion:^(BOOL granted, NSError *error)
-//     {
-//         if (granted)
-//         {
-//             NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/home_timeline.json"relativeToURL:Nil];
-//             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:feedUrl parameters:params];
-//             
-//             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
-//             
-//             [request setAccount:[twitterAccounts lastObject]];
-//             
-//             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-//                 
-//                 if (responseData && urlResponse.statusCode == 200)
-//                 {
-//                     NSError *err;
-//                     NSArray *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
-//                     callBackBlock(feedDict);
-//                 }
-//             }];
-//             
-//         }
-//     }];
 }
 
 -(void)fetchTweetsWithParams:(NSDictionary *)params withCallBackBlock:(void (^)(NSArray * tweetsData))callBackBlock
@@ -141,31 +127,30 @@
 
 - (void)postTweetWithParams:(NSDictionary *)params withCallBack:(void (^)(NSDictionary *))callBack
 {
-    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
     
-    [self.accountStore requestAccessToAccountsWithType:twitterAccountType options:NULL completion:^(BOOL granted, NSError *error)
-     {
-         if (granted)
-         {
-             NSURL *feedUrl = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json" relativeToURL:Nil];
-             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:feedUrl parameters:params];
-             
-             NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
-             
-             [request setAccount:[twitterAccounts lastObject]];
-             
-             [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                 
-                 if (responseData && urlResponse.statusCode == 200)
-                 {
-                     NSError *err;
-                     NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&err];
-                     callBack(feedDict);
-                 }
-             }];
-             
-         }
-     }];
+    NSString *uri = @"https://api.twitter.com/1.1/statuses/update.json";
+    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+    request.HTTPMethod = @"POST";
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uri]];
+    
+    NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
+    
+    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+    [manager POST:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if (operation.responseData && operation.response.statusCode == 200)
+        {
+            NSError *err;
+            NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:&err];
+            callBack(feedDict);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
+        NSLog(@"%@", a);
+    }];
     
 }
 

@@ -1525,8 +1525,8 @@ id removeNull(id rootObject) {
         [paramPairs addObject:[NSString stringWithFormat:@"%@=%@",[key fhs_URLEncode],[mutableParams[key] fhs_URLEncode]]];
     }
     
-    if ([request.HTTPMethod isEqualToString:@"GET"]) {
-        
+//    if ([request.HTTPMethod isEqualToString:@"GET"]) {
+    
         NSArray *halves = [request.URL.absoluteString componentsSeparatedByString:@"?"];
         
         if (halves.count > 1) {
@@ -1536,7 +1536,7 @@ id removeNull(id rootObject) {
                 [paramPairs addObjectsFromArray:parameters];
             }
         }
-    }
+//    }
     
     [paramPairs sortUsingSelector:@selector(compare:)];
     
