@@ -150,7 +150,7 @@ NSTimer *pullNewTweetsTimer;
 {
     for (NSDictionary *data in tweetsData)
     {
-        Tweet *tweet = [Tweet initWithDict:data withManagedContext:self.managedContext];
+        Tweet *tweet = [Tweet tweetWithJSON:data inManagedContext:self.managedContext];
         
         NSLog(@"tweet parsing - %@ %@ %@", tweet.idString, tweet.text, tweet.composer.name);
         //        NSError *error = nil;

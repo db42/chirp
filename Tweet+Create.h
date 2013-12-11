@@ -10,6 +10,6 @@
 
 @interface Tweet (Create)
 
-+ (id) initWithDict: (NSDictionary *) data withManagedContext:(NSManagedObjectContext *) managedContext;
++ (id) tweetWithJSON: (NSDictionary *) data inManagedContext:(NSManagedObjectContext *) managedContext;
 
 @end

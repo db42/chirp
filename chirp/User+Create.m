@@ -8,40 +8,55 @@
 
 #import "User+Create.h"
 
+static NSString *const TWTUserName = @"name";
+static NSString *const TWTUserId = @"id_str";
+static NSString *const TWTUserScreenName = @"screen_name";
+static NSString *const TWTUserProfileImageUrl = @"profile_image_url";
+static NSString *const TWTUserProfileBackgroundImageUrl = @"profile_background_image_url";
+static NSString *const TWTUserStatusesCount = @"statuses_count";
+static NSString *const TWTUserFollowersCount = @"followers_count";
+static NSString *const TWTUserFriendsCount = @"friends_count";
+
 @implementation User (Create)
 
-+ (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
++ (id)userWithJSON:(NSDictionary *)data inManagedContext:(NSManagedObjectContext *)managedContext
 {
+    NSString *userId = [data objectForKey:TWTUserId];
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    NSString *userId = [data objectForKey:@"id_str"];
     request.predicate = [NSPredicate predicateWithFormat:@"idString = %@", userId];
     request.sortDescriptors = nil;
     
-    NSError *error;
-    NSArray *resultUsers = [managedContext executeFetchRequest:request error:&error];
+    NSError *fetchError;
+    NSArray *resultUsers = [managedContext executeFetchRequest:request error:&fetchError];
     
     User *user;
-    if (error || !resultUsers)
+    if (fetchError || !resultUsers)
     {
-        NSLog(@"error %@", error);
+        NSLog(@"Error fetching from db - %@", fetchError);
     }
-    else if (resultUsers.count)
+    else if (!resultUsers.count)
     {
-        user = [resultUsers lastObject];
+        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedContext];
+        user.name = [data objectForKey:TWTUserName];
+        user.idString = [data objectForKey:TWTUserId];
+        user.screenName = [data objectForKey:TWTUserScreenName];
+        user.profileImageUrl = [data objectForKey:TWTUserProfileImageUrl];
+        user.profileBackgroundImageUrl = [data objectForKey:TWTUserProfileBackgroundImageUrl];
+        user.statusesCount = [data objectForKey:TWTUserStatusesCount];
+        user.followersCount = [data objectForKey:TWTUserFollowersCount];
+        user.friendsCount = [data objectForKey:TWTUserFriendsCount];
+        
+        NSError *saveError;
+        bool success = [managedContext save:&saveError];
+        if (!success)
+        {
+            NSLog(@"Error saving user in db - %@", saveError);
+        }
     }
     else
     {
-        user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedContext];
-        user.name = [data objectForKey:@"name"];
-        user.idString = [data objectForKey:@"id_str"];
-        user.screenName = [data objectForKey:@"screen_name"];
-        user.profileImageUrl = [data objectForKey:@"profile_image_url"];
-        user.profileBackgroundImageUrl = [data objectForKey:@"profile_background_image_url"];
-        user.statusesCount = [data objectForKey:@"statuses_count"];
-        user.followersCount = [data objectForKey:@"followers_count"];
-        user.friendsCount = [data objectForKey:@"friends_count"];
-        
-        [managedContext save:&error];
+        user = [resultUsers lastObject];
     }
     return user;
 }

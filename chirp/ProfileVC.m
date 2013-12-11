@@ -112,7 +112,7 @@
         {
             //fetch from twitterFetcher
             [self.tweetFetcher fetchUserWithScreenName:self.userScreenName withCallBackBlock:^(NSDictionary *tweetData){
-                self.user = [User initWithDict:tweetData withManagedContext:self.managedContext];
+                self.user = [User userWithJSON:tweetData inManagedContext:self.managedContext];
 //                NSLog("%@", tweetData);
             }];
             

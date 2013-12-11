@@ -29,7 +29,7 @@
 - (IBAction)postTweet:(UIBarButtonItem *)sender {
     NSDictionary *params = @{@"status": [self.tweetText text]};
     [self.tweetFetcher postTweetWithParams:params withCallBack:^(NSDictionary *tweetData){
-        [Tweet initWithDict:tweetData withManagedContext:self.managedContext];
+        [Tweet tweetWithJSON:tweetData inManagedContext:self.managedContext];
         
         [self dismissViewControllerAnimated:YES completion:nil];
     }];

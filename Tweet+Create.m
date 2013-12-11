@@ -9,41 +9,42 @@
 #import "Tweet+Create.h"
 #import "User+Create.h"
 
+static NSString *const TWTTweetId = @"id_str";
+static NSString *const TWTTweetText = @"text";
+
 @implementation Tweet (Create)
 
-+ (id)initWithDict:(NSDictionary *)data withManagedContext:(NSManagedObjectContext *)managedContext
++ (id)tweetWithJSON:(NSDictionary *)data inManagedContext:(NSManagedObjectContext *)managedContext
 {
-    NSString *tweetId = [data objectForKey:@"id_str"];
+    NSString *tweetId = [data objectForKey:TWTTweetId];
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
     request.predicate = [NSPredicate predicateWithFormat:@"idString = %@", tweetId];
     request.sortDescriptors = nil;
     
-    NSError *error;
-    NSArray *tweetsFromDB = [managedContext executeFetchRequest:request error:&error];
+    NSError *fetchError;
+    NSArray *tweetsFromDB = [managedContext executeFetchRequest:request error:&fetchError];
     
     Tweet *tweet;
-    //if error
     if (!tweetsFromDB || [tweetsFromDB count] > 1)
     {
-        NSLog(@"error %@", error);
+        NSLog(@"Error fetching from db - %@", fetchError);
     }
-    //not present in core data
     else if (![tweetsFromDB count])
     {
-        //store in db
         tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:managedContext];
         
-        tweet.idString = [data objectForKey:@"id_str"];
-        tweet.text = [data objectForKey:@"text"];
+        tweet.idString = [data objectForKey:TWTTweetId];
+        tweet.text = [data objectForKey:TWTTweetText];
+        tweet.composer = [User userWithJSON:[data objectForKey:@"user"] inManagedContext:managedContext];
         
-        tweet.composer = [User initWithDict:[data objectForKey:@"user"] withManagedContext:managedContext];
-        
-        
-        bool success = [managedContext save:&error];
-        NSLog(@"save success %d", success);
+        NSError *saveError;
+        bool success = [managedContext save:&saveError];
+        if (!success)
+        {
+            NSLog(@"Error saving tweet in db - %@", saveError);
+        }
     }
-    //if present in core data
     else
     {
         tweet =  [tweetsFromDB lastObject];

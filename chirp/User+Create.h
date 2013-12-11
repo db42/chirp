@@ -10,5 +10,5 @@
 
 @interface User (Create)
 
-+ (id) initWithDict: (NSDictionary *) data withManagedContext:(NSManagedObjectContext *) managedContext;
++ (id) userWithJSON: (NSDictionary *) data inManagedContext:(NSManagedObjectContext *) managedContext;
 @end
