@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface NetworkActivityIndicator : NSObject
-+ (void) show;
-+ (void) hide;
+
++ (id)sharedIndicator;
+- (void) show;
+- (void) hide;
 
 @end

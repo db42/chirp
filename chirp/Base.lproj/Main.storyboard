@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Demo FeedCDVC-->
+        <!--Timeline Tweets View Controller-->
         <scene sceneID="FgD-SO-Yk4">
             <objects>
-                <tableViewController id="pUm-iQ-kID" customClass="DemoFeedCDVC" sceneMemberID="viewController">
+                <tableViewController id="pUm-iQ-kID" customClass="TimelineTweetsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" id="FPp-5n-8yk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +41,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zxg-OY-AB0" kind="push" identifier="setTweet" id="Tak-ch-nvv"/>
+                                    <segue destination="zxg-OY-AB0" kind="push" identifier="individualTweet" id="Tak-ch-nvv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,7 +53,7 @@
                     <navigationItem key="navigationItem" id="zwv-tm-epj">
                         <barButtonItem key="rightBarButtonItem" title="Compose" id="8Sc-2X-3YP">
                             <connections>
-                                <segue destination="7bT-JJ-hnA" kind="modal" identifier="setManagedContext" id="Kg1-oj-MpD"/>
+                                <segue destination="7bT-JJ-hnA" kind="modal" identifier="composeTweet" id="Kg1-oj-MpD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -120,10 +120,10 @@
             </objects>
             <point key="canvasLocation" x="1483" y="-1332"/>
         </scene>
-        <!--TweetVC-->
+        <!--Tweet View Controller-->
         <scene sceneID="fpU-Rr-OUD">
             <objects>
-                <viewController id="zxg-OY-AB0" customClass="TweetVC" sceneMemberID="viewController">
+                <viewController id="zxg-OY-AB0" customClass="TweetViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h38-fE-kQ8"/>
                         <viewControllerLayoutGuide type="bottom" id="SrU-kU-mF4"/>
@@ -191,10 +191,10 @@
             </objects>
             <point key="canvasLocation" x="-248" y="-226"/>
         </scene>
-        <!--ProfileVC-->
+        <!--Profile View Controller-->
         <scene sceneID="Nni-52-OWy">
             <objects>
-                <viewController id="Ixg-LA-wgv" customClass="ProfileVC" sceneMemberID="viewController">
+                <viewController id="Ixg-LA-wgv" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dN8-h8-lwW"/>
                         <viewControllerLayoutGuide type="bottom" id="vA1-sO-OQH"/>

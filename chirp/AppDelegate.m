@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "DemoFeedCDVC.h"
-#import "ProfileVC.h"
+#import "TimelineTweetsViewController.h"
+#import "ProfileViewController.h"
 
 @implementation AppDelegate
 
@@ -18,16 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    
-    UINavigationController *navigationController = tabBarController.viewControllers[0];
-    DemoFeedCDVC *controller = (DemoFeedCDVC *)navigationController.topViewController;
-    controller.managedContext = self.managedObjectContext;
-    
-    navigationController = tabBarController.viewControllers[1];
-    ProfileVC *profileVC =(ProfileVC *)navigationController.topViewController;
-    profileVC.managedContext = self.managedObjectContext;
+    for (UINavigationController *navigationController in tabBarController.viewControllers) {
+        id controller = navigationController.topViewController;
+        [controller performSelector:@selector(setManagedContext:) withObject:self.managedObjectContext];
+    }
     
     return YES;
 }

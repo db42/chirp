@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @interface ComposeTweetViewController : UIViewController
+
 @property (strong, nonatomic) NSManagedObjectContext *managedContext;
 
 @end

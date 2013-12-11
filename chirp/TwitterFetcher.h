@@ -10,9 +10,9 @@
 
 @interface TwitterFetcher : NSObject
 
-- (id) initWithAuthToken: (NSString *)authToken;
-- (void) fetchUserWithScreenName: (NSString *)screenName withCallBackBlock:(void (^)(NSDictionary * tweetsData))callBackBlock;
-- (void) fetchTweetsWithParams: (NSDictionary *)params withCallBackBlock:(void (^)(NSArray *tweetsData))callBackBlock;
-- (void) postTweetWithParams: (NSDictionary *)params withCallBack:(void (^)(NSDictionary *tweetData))callBack;
+- (void) fetchUserWithScreenName: (NSString *)screenName success:(void (^)(NSDictionary * userData))success;
+- (void) fetchSignedInUserWithSuccessHandler:(void (^)(NSDictionary * userData))success;
+- (void) fetchTweetsWithParams: (NSDictionary *)params success:(void (^)(NSArray *tweetsData))success;
+- (void) postTweetWithParams: (NSDictionary *)params success:(void (^)(NSDictionary *tweetData))success;
 
 @end

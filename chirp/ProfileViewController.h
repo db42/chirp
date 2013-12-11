@@ -10,9 +10,8 @@
 #import "User.h"
 
 
-@interface ProfileVC : UIViewController
+@interface ProfileViewController : UIViewController
 
-@property (strong, nonatomic) NSString *userScreenName;
 @property (strong, nonatomic) NSManagedObjectContext *managedContext;
 
 @end

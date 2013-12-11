@@ -6,67 +6,42 @@
 //  Copyright (c) 2013 Dushyant Bansal. All rights reserved.
 //
 
-#import "FeedCDVC.h"
+#import "TweetsCoreDataViewController.h"
 #import "CoreData/CoreData.h"
 #import "Tweet.h"
 #import "User.h"
-#import "TweetVC.h"
+#import "TweetViewController.h"
 
-@interface FeedCDVC ()
+static NSString *const IndividualTweetVCSegueId = @"individualTweet";
 
+@interface TweetsCoreDataViewController ()
 @end
 
-@implementation FeedCDVC
-
-- (void)setManagedContext:(NSManagedObjectContext *)managedContext
-{
-    _managedContext = managedContext;
-    
-    [self loadFetchedResultController];
-    
-}
+@implementation TweetsCoreDataViewController
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"setTweet"])
+    if ([segue.identifier isEqualToString:IndividualTweetVCSegueId])
     {
         id destination = [segue destinationViewController];
         if ([destination respondsToSelector:@selector(setTweet:)])
         {
-            Tweet *tweet = [self.resultController objectAtIndexPath:[self.tableView indexPathForCell:sender]];
+            Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:sender]];
             [destination performSelector:@selector(setTweet:) withObject:tweet];
         }
-        
     }
-}
-
-- (void) loadFetchedResultController
-{
-    //setup managedContext
-    
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
-    fetchRequest.fetchBatchSize = 20;
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"idString" ascending:false];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    self.resultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedContext sectionNameKeyPath:nil cacheName:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Tweet *tweet = [self.resultController objectAtIndexPath:indexPath];
+    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *text = tweet.text;
     
     CGSize maxSize = CGSizeMake(206.0f, MAXFLOAT);
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0]}];
     
-    
     CGRect rect = [attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    
     CGSize size = rect.size;
-//    NSLog(@"%@ %f", indexPath, size.height);
     return ceil(size.height) + 35;
 }
 
@@ -74,9 +49,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tweet row"];
     
-    
-    Tweet *tweet = [self.resultController objectAtIndexPath:indexPath];
-    
+    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSURL *url = [NSURL URLWithString:tweet.composer.profileImageUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     
@@ -88,7 +61,6 @@
     }
     cell.textLabel.text = tweet.composer.name;
     cell.detailTextLabel.text = tweet.text;
-    
     cell.detailTextLabel.numberOfLines = 0;
     
     return cell;
@@ -96,6 +68,7 @@
 
 - (void)loadMoreRows
 {
+    NSAssert(NO, @"Subclasses need to implement this method");
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

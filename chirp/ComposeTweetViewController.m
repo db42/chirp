@@ -11,6 +11,7 @@
 #import "Tweet+Create.h"
 
 @interface ComposeTweetViewController ()
+
 @property (strong, nonatomic) TwitterFetcher *tweetFetcher;
 @property (weak, nonatomic) IBOutlet UITextView *tweetText;
 
@@ -26,38 +27,23 @@
 }
 
 
-- (IBAction)postTweet:(UIBarButtonItem *)sender {
-    NSDictionary *params = @{@"status": [self.tweetText text]};
-    [self.tweetFetcher postTweetWithParams:params withCallBack:^(NSDictionary *tweetData){
-        [Tweet tweetWithJSON:tweetData inManagedContext:self.managedContext];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-}
-
-- (IBAction)cancelTweet:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:Nil];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (IBAction)postTweet:(UIBarButtonItem *)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    NSString *tweet = [self.tweetText text];
+    if ([tweet length])
+    {
+        NSDictionary *params = @{@"status": tweet};
+        [self.tweetFetcher postTweetWithParams:params success:^(NSDictionary *tweetData)
+         {
+             [Tweet tweetWithJSON:tweetData inManagedContext:self.managedContext];
+             [self dismissViewControllerAnimated:YES completion:nil];
+         }];
     }
-    return self;
 }
 
-- (void)viewDidLoad
+- (IBAction)cancelTweet:(UIBarButtonItem *)sender
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
 @end

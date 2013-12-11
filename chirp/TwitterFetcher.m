@@ -10,6 +10,10 @@
 #import "AFNetworking.h"
 #import "FHSTwitterEngine.h"
 
+static NSString *const TWTUserProfileUrl = @"https://api.twitter.com/1.1/users/show.json";
+static NSString *const TWTUserTimelineUrl = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
+static NSString *const TWTTweetPostUrl = @"https://api.twitter.com/1.1/statuses/update.json";
+static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1/account/verify_credentials.json";
 
 @interface TwitterFetcher()
 @property (strong, nonatomic) NSString *authToken;
@@ -18,140 +22,129 @@
 
 @implementation TwitterFetcher
 
-- (id) initWithAuthToken: (NSString *)authToken
-{
-    self = [super init];
-    if (self)
+- (NSString *)authToken {
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  return [userDefaults objectForKey:@"oauth_token"];
+}
+
+- (NSString *)tokenSecret {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *tokenSecret = [defaults objectForKey:@"oauth_token_secret"];
+  return tokenSecret;
+}
+
+- (void)fetchUserWithScreenName:(NSString *)screenName success:(void(^)(NSDictionary *userData))success {
+  NSDictionary *params = @{@"screen_name": screenName};
+  NSString *uriWithQueryString = [self composeUri:TWTUserProfileUrl withParams:params];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+  
+  AFHTTPRequestOperationManager *manager = [self managerWithAuthHeader:request];
+  [manager GET:TWTUserProfileUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+    if (operation.responseData && operation.response.statusCode == 200)
     {
-        self.authToken = authToken;
+      NSError *err;
+      NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                               options:NSJSONReadingAllowFragments
+                                                                 error:&err];
+      success(userData);
     }
-    return self;
-}
-
-- (NSString *)authToken
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"oauth_token"];
-}
-
-- (NSString *)tokenSecret
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *tokenSecret = [defaults objectForKey:@"oauth_token_secret"];
-    return tokenSecret;
-}
-
-- (void) fetchUserWithScreenName: (NSString *)screenName withCallBackBlock:(void (^)(NSDictionary * tweetsData))callBackBlock
-{
-    NSDictionary *params = @{@"screen_name": @"dushyant_db"};
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-    NSString *uri = @"https://api.twitter.com/1.1/users/show.json";
-    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
     
-    NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
-    
-    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    [manager GET:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
-        if (operation.responseData && operation.response.statusCode == 200)
-        {
-            NSError *err;
-            NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:&err];
-            callBackBlock(userData);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
-        NSLog(@"%@", a);
-    }];
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    NSString *response = [[NSString alloc] initWithData:operation.responseData
+                                               encoding:NSASCIIStringEncoding];
+    NSLog(@"Error fetching user profile from twitter - %@", response);
+  }];
 }
 
-//- (NSString *) genAuthHeader
-//{
-//    NSString *secret = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqmtssrThY";
-//    NSString *consumerKey = @"HdYpIQHu000GiSJ0SPGGw";
-//    NSString *nonce = @"";
-//    NSString *signature = @"";
-//    NSString *timestamp = @"";
-//    NSString *authHeader = [NSString stringWithFormat:@"OAuth oauth_consumer_key=\"%@\",oauth_nonce=\"%@\",oauth_signature=\"%@\",oauth_signature_method=\"HMAC-SHA1\",oauth_timestamp=\"%@\",oauth_token=\"%@\",oauth_version=\"1.0\"", consumerKey, nonce, self.authToken, timestamp, self.authToken];
-//    return authHeader;
-//}
-
-- (NSString *)composeUri:(NSString *)uri withParams:(NSDictionary *)params
-{
-    if ([uri rangeOfString:@"?"].location == NSNotFound)
+- (void)fetchSignedInUserWithSuccessHandler:(void(^)(NSDictionary *))success {
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:TWTSignedInUserProfileUrl]];
+  
+  AFHTTPRequestOperationManager *manager = [self managerWithAuthHeader:request];
+  [manager GET:TWTSignedInUserProfileUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+    if (operation.responseData && operation.response.statusCode == 200)
     {
-        uri = [uri stringByAppendingString:@"?"];
+      NSError *err;
+      NSDictionary *userData = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                               options:NSJSONReadingAllowFragments
+                                                                 error:&err];
+      success(userData);
     }
     
-//    NSString *queryString = [[NSString alloc] init];
-    for (NSString *key in params.allKeys) {
-        NSString *prefix = ([uri hasSuffix:@"?"] || [uri hasSuffix:@"&"]) ? @"" : @"&";
-            
-        uri = [uri stringByAppendingString:[NSString stringWithFormat:@"%@%@=%@",prefix, key, params[key]]];
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    NSString *response = [[NSString alloc] initWithData:operation.responseData
+                                               encoding:NSASCIIStringEncoding];
+    NSLog(@"Error fetching user profile from twitter - %@", response);
+  }];
+}
+
+- (NSString *)composeUri:(NSString *)uri withParams:(NSDictionary *)params {
+  if ([uri rangeOfString:@"?"].location == NSNotFound)
+  {
+    uri = [uri stringByAppendingString:@"?"];
+  }
+  
+  for (NSString *key in params.allKeys) {
+    NSString *prefix = ([uri hasSuffix:@"?"] || [uri hasSuffix:@"&"]) ? @"" : @"&";
+    
+    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"%@%@=%@",prefix, key, params[key]]];
+  }
+  return uri;
+}
+
+- (void)fetchTweetsWithParams:(NSDictionary *)params success:(void(^)(NSArray *tweetsData))success {
+  NSString *uriWithQueryString = [self composeUri:TWTUserTimelineUrl withParams:params];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+  
+  AFHTTPRequestOperationManager *manager = [self managerWithAuthHeader:request];
+  [manager GET:TWTUserTimelineUrl
+            parameters:params
+               success:^(AFHTTPRequestOperation *operation, id responseObject){
+    if (operation.responseData && operation.response.statusCode == 200)
+    {
+      NSError *err;
+      NSArray *feedData = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                          options:NSJSONReadingAllowFragments
+                                                            error:&err];
+      success(feedData);
     }
-    return uri;
+    
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    NSString *response = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
+    NSLog(@"Error fetching user timeline tweets from twitter - %@", response);
+  }];
 }
 
-- (void)fetchTweetsWithParams:(void (^)(NSArray *))callBackBlock params:(NSDictionary *)params
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-    NSString *uri = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
-    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
-    
-    NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
-    
-    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    
-    [manager GET:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
-        if (operation.responseData && operation.response.statusCode == 200)
-        {
-            NSError *err;
-            NSArray *feedDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:&err];
-            callBackBlock(feedDict);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
-        NSLog(@"%@", a);
-    }];
+- (AFHTTPRequestOperationManager *)managerWithAuthHeader:(NSMutableURLRequest *)request {
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+  NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request
+                                                         verifierString:nil
+                                                            tokenString:self.authToken
+                                                      tokenSecretString:self.tokenSecret];
+  [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+  return manager;
 }
 
--(void)fetchTweetsWithParams:(NSDictionary *)params withCallBackBlock:(void (^)(NSArray * tweetsData))callBackBlock
-{
-    [self fetchTweetsWithParams:callBackBlock params:params];
-}
-
-- (void)postTweetWithParams:(NSDictionary *)params withCallBack:(void (^)(NSDictionary *))callBack
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+- (void)postTweetWithParams:(NSDictionary *)params success:(void(^)(NSDictionary *tweetData))success {
+  NSString *uriWithQueryString = [self composeUri:TWTTweetPostUrl withParams:params];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+  request.HTTPMethod = @"POST";
+  
+  AFHTTPRequestOperationManager *manager = [self managerWithAuthHeader:request];
+  [manager POST:TWTTweetPostUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+    if (operation.responseData && operation.response.statusCode == 200)
+    {
+      NSError *err;
+      NSDictionary *tweetData = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                options:NSJSONReadingAllowFragments
+                                                                  error:&err];
+      success(tweetData);
+    }
     
-    NSString *uri = @"https://api.twitter.com/1.1/statuses/update.json";
-    NSString *uriWithQueryString = [self composeUri:uri withParams:params];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
-    request.HTTPMethod = @"POST";
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uri]];
-    
-    NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request verifierString:nil tokenString:self.authToken tokenSecretString:self.tokenSecret];
-    
-    [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    [manager POST:uri parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
-        if (operation.responseData && operation.response.statusCode == 200)
-        {
-            NSError *err;
-            NSDictionary *feedDict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:&err];
-            callBack(feedDict);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *a = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
-        NSLog(@"%@", a);
-    }];
-    
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    NSString *response = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
+    NSLog(@"Error posting a tweet - %@", response);
+  }];
 }
 
 @end

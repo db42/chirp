@@ -12,9 +12,17 @@
 
 @implementation NetworkActivityIndicator
 
-static NSInteger networkOps = 0;
+NSInteger networkOps = 0;
 
-+ (void)show
++ (id)sharedIndicator {
+  static id sharedIndicator;
+  static dispatch_once_t once;
+  dispatch_once(&once, ^{
+    sharedIndicator = [[self alloc] init];
+  });
+  return sharedIndicator;
+}
+- (void)show
 {
     @synchronized(self)
     {
@@ -23,7 +31,7 @@ static NSInteger networkOps = 0;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
-+ (void)hide
+- (void)hide
 {
     @synchronized(self)
     {

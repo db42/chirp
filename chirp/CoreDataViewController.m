@@ -14,37 +14,35 @@
 
 @implementation CoreDataViewController
 
-- (void)setResultController:(NSFetchedResultsController *)resultController
+- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
-    _resultController = resultController;
-    _resultController.delegate = self;
+    _fetchedResultsController = fetchedResultsController;
+    _fetchedResultsController.delegate = self;
     
-    if (resultController)
+    NSError *error;
+    BOOL success = [_fetchedResultsController performFetch:&error];
+    if (success)
     {
-        NSError *error;
-        BOOL success = [_resultController performFetch:&error];
-        if (success)
-        {
-            [self.tableView reloadData];
-        }
-        else
-        {
-            NSLog(@"Failed to fetch.");
-        }
+        [self.tableView reloadData];
+    }
+    else
+    {
+        NSLog(@"Failed to fetch, error - %@", error);
     }
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.resultController sections] count];
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[self.resultController sections] count] > 0)
+    if ([[self.fetchedResultsController sections] count] > 0)
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.resultController sections] objectAtIndex:section];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
         return [sectionInfo numberOfObjects];
     }
     else
@@ -52,81 +50,24 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([[self.resultController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.resultController  sections] objectAtIndex:section];
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController  sections] objectAtIndex:section];
         return [sectionInfo name];
     } else
         return nil;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [self.resultController sectionIndexTitles];
+    return [self.fetchedResultsController sectionIndexTitles];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return [self.resultController sectionForSectionIndexTitle:title atIndex:index];
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-/*
- Assume self has a property 'tableView' -- as is the case for an instance of a UITableViewController
- subclass -- and a method configureCell:atIndexPath: which updates the contents of a given cell
- with information from a managed object at the given index path in the fetched results controller.
- */
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
-
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
@@ -143,7 +84,6 @@
             break;
     }
 }
-
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
@@ -175,7 +115,6 @@
             break;
     }
 }
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
