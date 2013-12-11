@@ -27,6 +27,10 @@
         {
             [self.tableView reloadData];
         }
+        else
+        {
+            NSLog(@"Failed to fetch.");
+        }
     }
 }
 #pragma mark - Table view data source

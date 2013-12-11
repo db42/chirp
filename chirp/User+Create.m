@@ -17,10 +17,10 @@
     request.predicate = [NSPredicate predicateWithFormat:@"idString = %@", userId];
     request.sortDescriptors = nil;
     
-    User *user;
     NSError *error;
     NSArray *resultUsers = [managedContext executeFetchRequest:request error:&error];
     
+    User *user;
     if (error || !resultUsers)
     {
         NSLog(@"error %@", error);
