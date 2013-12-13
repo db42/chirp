@@ -22,6 +22,7 @@ NSInteger networkOps = 0;
   });
   return sharedIndicator;
 }
+
 - (void)show
 {
     @synchronized(self)
