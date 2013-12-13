@@ -17,11 +17,11 @@
 #import "TwitterFetcher.h"
 #import "ProfileViewController.h"
 #import "NetworkActivityIndicator.h"
+#import "Constants.h"
 
 static NSTimeInterval const TwitterPollIntervalSec = 60.0;
 static NSString *const ComposeTweetVCSegueId = @"composeTweet";
 static NSString *const AccessTokenObjectKey = @"access_token_object";
-static NSString *const AuthTokenKey = @"oauth_token";
 static NSString *const APPConsumerKey = @"HdYpIQHu000GiSJ0SPGGw";
 static NSString *const APPConsumerSecret = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqmtssrThY";
 

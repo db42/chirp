@@ -44,6 +44,7 @@
 		3AB3182A1833CF2C00C605CD /* chirp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */; };
 		3AB318451834966000C605CD /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB318441834966000C605CD /* User+Create.m */; };
 		3AB33194185AD6730053B5BC /* Tweet+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB33193185AD6730053B5BC /* Tweet+Create.m */; };
+		3AB33197185AD9150053B5BC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB33196185AD9150053B5BC /* Constants.m */; };
 		3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799D8183B415800A65C98 /* TwitterFetcher.m */; };
 		3AC799E1183C748400A65C98 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799E0183C748400A65C98 /* ProfileViewController.m */; };
 		3AC799F0183C8C2200A65C98 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC799EF183C8C2200A65C98 /* User.m */; };
@@ -122,6 +123,8 @@
 		3AB318441834966000C605CD /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		3AB33192185AD6730053B5BC /* Tweet+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+Create.h"; sourceTree = "<group>"; };
 		3AB33193185AD6730053B5BC /* Tweet+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+Create.m"; sourceTree = "<group>"; };
+		3AB33195185AD9150053B5BC /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		3AB33196185AD9150053B5BC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		3AC799D7183B415800A65C98 /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
 		3AC799D8183B415800A65C98 /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		3AC799DF183C748400A65C98 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				3AB318281833CF2C00C605CD /* chirp.xcdatamodeld */,
 				3A16F9D4183352E70011D02B /* Images.xcassets */,
 				3A0432831841F8D400DBE006 /* testimage.jpeg */,
+				3AB33195185AD9150053B5BC /* Constants.h */,
+				3AB33196185AD9150053B5BC /* Constants.m */,
 				3A4E5EBF1859A5CD00825221 /* Additions */,
 				3AC799DD183C744C00A65C98 /* Model */,
 				3AC799DE183C745A00A65C98 /* Fetcher */,
@@ -449,6 +454,7 @@
 				3A731AF7184E04CA0059C289 /* AFURLResponseSerialization.m in Sources */,
 				3A4E5EBE1859A46B00825221 /* UIImageView+Addition.m in Sources */,
 				3AC799D9183B415800A65C98 /* TwitterFetcher.m in Sources */,
+				3AB33197185AD9150053B5BC /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

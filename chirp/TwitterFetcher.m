@@ -9,6 +9,7 @@
 #import "TwitterFetcher.h"
 #import "AFNetworking.h"
 #import "FHSTwitterEngine.h"
+#import "Constants.h"
 
 static NSString *const TWTUserProfileUrl = @"https://api.twitter.com/1.1/users/show.json";
 static NSString *const TWTUserTimelineUrl = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
@@ -24,13 +25,38 @@ static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1
 
 - (NSString *)authToken {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  return [userDefaults objectForKey:@"oauth_token"];
+  return [userDefaults objectForKey:AuthTokenKey];
 }
 
 - (NSString *)tokenSecret {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSString *tokenSecret = [defaults objectForKey:@"oauth_token_secret"];
+  NSString *tokenSecret = [defaults objectForKey:AuthTokenSecretKey];
   return tokenSecret;
+}
+
+- (NSString *)composeUri:(NSString *)uri withParams:(NSDictionary *)params {
+  if ([uri rangeOfString:@"?"].location == NSNotFound)
+  {
+    uri = [uri stringByAppendingString:@"?"];
+  }
+  
+  for (NSString *key in params.allKeys) {
+    NSString *prefix = ([uri hasSuffix:@"?"] || [uri hasSuffix:@"&"]) ? @"" : @"&";
+    
+    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"%@%@=%@",prefix, key, params[key]]];
+  }
+  return uri;
+}
+
+- (AFHTTPRequestOperationManager *)managerWithAuthHeader:(NSMutableURLRequest *)request {
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+  NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request
+                                                         verifierString:nil
+                                                            tokenString:self.authToken
+                                                      tokenSecretString:self.tokenSecret];
+  [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+  return manager;
 }
 
 - (void)fetchUserWithScreenName:(NSString *)screenName success:(void(^)(NSDictionary *userData))success {
@@ -77,20 +103,6 @@ static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1
   }];
 }
 
-- (NSString *)composeUri:(NSString *)uri withParams:(NSDictionary *)params {
-  if ([uri rangeOfString:@"?"].location == NSNotFound)
-  {
-    uri = [uri stringByAppendingString:@"?"];
-  }
-  
-  for (NSString *key in params.allKeys) {
-    NSString *prefix = ([uri hasSuffix:@"?"] || [uri hasSuffix:@"&"]) ? @"" : @"&";
-    
-    uri = [uri stringByAppendingString:[NSString stringWithFormat:@"%@%@=%@",prefix, key, params[key]]];
-  }
-  return uri;
-}
-
 - (void)fetchTweetsWithParams:(NSDictionary *)params success:(void(^)(NSArray *tweetsData))success {
   NSString *uriWithQueryString = [self composeUri:TWTUserTimelineUrl withParams:params];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
@@ -112,17 +124,6 @@ static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1
     NSString *response = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
     NSLog(@"Error fetching user timeline tweets from twitter - %@", response);
   }];
-}
-
-- (AFHTTPRequestOperationManager *)managerWithAuthHeader:(NSMutableURLRequest *)request {
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-  NSString *authHeader = [[FHSTwitterEngine sharedEngine] genAuthHeader:request
-                                                         verifierString:nil
-                                                            tokenString:self.authToken
-                                                      tokenSecretString:self.tokenSecret];
-  [manager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
-  return manager;
 }
 
 - (void)postTweetWithParams:(NSDictionary *)params success:(void(^)(NSDictionary *tweetData))success {
