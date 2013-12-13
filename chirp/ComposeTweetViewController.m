@@ -19,31 +19,36 @@
 
 @implementation ComposeTweetViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [self.tweetText becomeFirstResponder];
+}
+
 - (TwitterFetcher *)tweetFetcher
 {
-    if (!_tweetFetcher)
-        _tweetFetcher = [[TwitterFetcher alloc] init];
-    return _tweetFetcher;
+  if (!_tweetFetcher)
+    _tweetFetcher = [[TwitterFetcher alloc] init];
+  return _tweetFetcher;
 }
 
 
 - (IBAction)postTweet:(UIBarButtonItem *)sender
 {
-    NSString *tweet = [self.tweetText text];
-    if ([tweet length])
-    {
-        NSDictionary *params = @{@"status": tweet};
-        [self.tweetFetcher postTweetWithParams:params success:^(NSDictionary *tweetData)
-         {
-             [Tweet tweetWithJSON:tweetData inManagedContext:self.managedContext];
-             [self dismissViewControllerAnimated:YES completion:nil];
-         }];
-    }
+  NSString *tweet = [self.tweetText text];
+  if ([tweet length])
+  {
+    NSDictionary *params = @{@"status": tweet};
+    [self.tweetFetcher postTweetWithParams:params success:^(NSDictionary *tweetData)
+     {
+       [Tweet tweetWithJSON:tweetData inManagedContext:self.managedContext];
+       [self dismissViewControllerAnimated:YES completion:nil];
+     }];
+  }
 }
 
 - (IBAction)cancelTweet:(UIBarButtonItem *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:Nil];
+  [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
 @end
