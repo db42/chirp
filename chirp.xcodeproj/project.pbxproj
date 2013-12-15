@@ -26,6 +26,8 @@
 		3A16F9F518339E630011D02B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F418339E630011D02B /* Twitter.framework */; };
 		3A16F9F71833A0C10011D02B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F61833A0C10011D02B /* Social.framework */; };
 		3A16F9F91833A2E40011D02B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A16F9F81833A2E40011D02B /* Accounts.framework */; };
+		3A33D523185DCE9A004402D1 /* FeedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A33D522185DCE9A004402D1 /* FeedManager.m */; };
+		3A33D526185E25FA004402D1 /* AccessTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A33D525185E25FA004402D1 /* AccessTokenManager.m */; };
 		3A4E5EBE1859A46B00825221 /* UIImageView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E5EBD1859A46B00825221 /* UIImageView+Addition.m */; };
 		3A5467DB1850640B00AE10FE /* FHSTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5467DA1850640B00AE10FE /* FHSTwitterEngine.m */; };
 		3A731AF0184E04CA0059C289 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A731ADE184E04CA0059C289 /* AFHTTPRequestOperation.m */; };
@@ -87,6 +89,10 @@
 		3A16F9F418339E630011D02B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		3A16F9F61833A0C10011D02B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3A16F9F81833A2E40011D02B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		3A33D521185DCE9A004402D1 /* FeedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedManager.h; sourceTree = "<group>"; };
+		3A33D522185DCE9A004402D1 /* FeedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedManager.m; sourceTree = "<group>"; };
+		3A33D524185E25FA004402D1 /* AccessTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessTokenManager.h; sourceTree = "<group>"; };
+		3A33D525185E25FA004402D1 /* AccessTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessTokenManager.m; sourceTree = "<group>"; };
 		3A4E5EBC1859A46B00825221 /* UIImageView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Addition.h"; sourceTree = "<group>"; };
 		3A4E5EBD1859A46B00825221 /* UIImageView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Addition.m"; sourceTree = "<group>"; };
 		3A5467D91850640B00AE10FE /* FHSTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHSTwitterEngine.h; sourceTree = "<group>"; };
@@ -226,6 +232,10 @@
 				3AC799DD183C744C00A65C98 /* Model */,
 				3AC799DE183C745A00A65C98 /* Fetcher */,
 				3A16F9C3183352E70011D02B /* Supporting Files */,
+				3A33D521185DCE9A004402D1 /* FeedManager.h */,
+				3A33D522185DCE9A004402D1 /* FeedManager.m */,
+				3A33D524185E25FA004402D1 /* AccessTokenManager.h */,
+				3A33D525185E25FA004402D1 /* AccessTokenManager.m */,
 			);
 			path = chirp;
 			sourceTree = "<group>";
@@ -443,9 +453,11 @@
 				3A731AF1184E04CA0059C289 /* AFHTTPRequestOperationManager.m in Sources */,
 				3A04328718433F1100DBE006 /* CoreDataViewController.m in Sources */,
 				3A5467DB1850640B00AE10FE /* FHSTwitterEngine.m in Sources */,
+				3A33D523185DCE9A004402D1 /* FeedManager.m in Sources */,
 				3AC799F3183C8C2300A65C98 /* Tweet.m in Sources */,
 				3AB318451834966000C605CD /* User+Create.m in Sources */,
 				3A04328A1844AC6100DBE006 /* NetworkActivityIndicator.m in Sources */,
+				3A33D526185E25FA004402D1 /* AccessTokenManager.m in Sources */,
 				3A16F9C9183352E70011D02B /* main.m in Sources */,
 				3A731AFB184F0EF10059C289 /* ComposeTweetViewController.m in Sources */,
 				3A731AF6184E04CA0059C289 /* AFURLRequestSerialization.m in Sources */,

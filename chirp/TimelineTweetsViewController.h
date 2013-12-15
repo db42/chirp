@@ -7,9 +7,8 @@
 //
 
 #import "TweetsCoreDataViewController.h"
-#import "FHSTwitterEngine.h"
 
-@interface TimelineTweetsViewController : TweetsCoreDataViewController<FHSTwitterEngineAccessTokenDelegate>
+@interface TimelineTweetsViewController : TweetsCoreDataViewController
 @property (strong, nonatomic) NSManagedObjectContext *managedContext;
 
 @end
