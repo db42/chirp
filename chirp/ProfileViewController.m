@@ -11,8 +11,9 @@
 #import "User+Create.h"
 #import "UIImageView+Addition.h"
 #import "NetworkActivityIndicator.h"
+#import "Constants.h"
+#import "UsersViewController.h"
 
-static NSString *const SignedInUserScreenNameKey = @"signedin_user_screen_name";
 
 @interface ProfileViewController ()
 @property (strong, nonatomic) NSString *userScreenName;
@@ -112,6 +113,13 @@ static NSString *const SignedInUserScreenNameKey = @"signedin_user_screen_name";
              self.signedInUser = [User userWithJSON:tweetData inManagedContext:self.managedContext];
          }];
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier  isEqual: @"followersTable"]) {
+    UsersViewController *destController = (UsersViewController *)segue.destinationViewController;
+    destController.managedObjectContext = self.managedContext;
+  }
 }
 
 @end

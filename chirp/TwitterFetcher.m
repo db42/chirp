@@ -12,6 +12,7 @@
 #import "Constants.h"
 
 static NSString *const TWTUserProfileUrl = @"https://api.twitter.com/1.1/users/show.json";
+static NSString *const TWTUserFollowersUrl = @"https://api.twitter.com/1.1/followers/ids.json";
 static NSString *const TWTUserTimelineUrl = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
 static NSString *const TWTTweetPostUrl = @"https://api.twitter.com/1.1/statuses/update.json";
 static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1/account/verify_credentials.json";
@@ -59,8 +60,16 @@ static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1
   return manager;
 }
 
-- (void)fetchUserWithScreenName:(NSString *)screenName success:(void(^)(NSDictionary *userData))success {
-  NSDictionary *params = @{@"screen_name": screenName};
+- (void)fetchUserWithScreenName:(NSString *)screenName withUserId:(id)userId success:(void(^)(NSDictionary *userData))success {
+  NSDictionary *params;
+  if (screenName != nil)
+  {
+    params = @{@"screen_name": screenName};
+  }
+  else
+  {
+    params = @{@"user_id": userId};
+  }
   NSString *uriWithQueryString = [self composeUri:TWTUserProfileUrl withParams:params];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
   
@@ -146,6 +155,29 @@ static NSString *const TWTSignedInUserProfileUrl = @"https://api.twitter.com/1.1
     NSString *response = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
     NSLog(@"Error posting a tweet - %@", response);
   }];
+}
+
+- (void)fetchFollowersForUser:(NSDictionary *)queryParams success:(void (^)(NSArray *))success {
+  NSString *uriWithQueryString = [self composeUri:TWTUserFollowersUrl withParams:queryParams];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:uriWithQueryString]];
+  
+  AFHTTPRequestOperationManager *manager = [self managerWithAuthHeader:request];
+  [manager GET:TWTUserFollowersUrl parameters:queryParams success:^(AFHTTPRequestOperation *operation, id responseObject){
+    if (operation.responseData && operation.response.statusCode == 200)
+    {
+      NSError *err;
+      NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:operation.responseData
+                                                                options:NSJSONReadingAllowFragments
+                                                                  error:&err];
+      NSArray *followersIds = [responseData objectForKey:@"ids"];
+      success(followersIds);
+    }
+    
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+    NSString *response = [[NSString alloc] initWithData:operation.responseData encoding:NSASCIIStringEncoding];
+    NSLog(@"Error fetching followers ids - %@", response);
+  }];
+  
 }
 
 @end

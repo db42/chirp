@@ -12,4 +12,5 @@
 
 extern NSString *const AuthTokenKey;
 extern NSString *const AuthTokenSecretKey;
+extern NSString *const SignedInUserScreenNameKey;
 @end

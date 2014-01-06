@@ -46,7 +46,9 @@ static NSString *const TWTUserFriendsCount = @"friends_count";
         user.statusesCount = [data objectForKey:TWTUserStatusesCount];
         user.followersCount = [data objectForKey:TWTUserFollowersCount];
         user.friendsCount = [data objectForKey:TWTUserFriendsCount];
-        
+      user.friends = [[NSSet alloc] init];
+      user.followers = [[NSSet alloc] init];
+      
         NSError *saveError;
         bool success = [managedContext save:&saveError];
         if (!success)

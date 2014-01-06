@@ -64,7 +64,16 @@ static NSString *const APPConsumerSecret = @"uBOLiEdqobCBfUATnDEmBGUhp6Kci6gJaqm
   [[FHSTwitterEngine sharedEngine] setDelegate:self.accessTokenManager];
   
   if ([self.accessTokenManager isAuthTokenPresent])
-    [self refreshView];
+    return;
+  
+  UIViewController *loginController = [[FHSTwitterEngine sharedEngine]
+                                       loginControllerWithCompletionHandler:^(BOOL success)
+                                       {
+                                         [self refreshView];
+                                       }];
+  [self presentViewController:loginController animated:YES completion:nil];
+//  if ([self.accessTokenManager isAuthTokenPresent])
+//    [self refreshView];
 }
 
 - (void)setManagedContext:(NSManagedObjectContext *)managedContext

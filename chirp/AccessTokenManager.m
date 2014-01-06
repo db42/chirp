@@ -15,7 +15,7 @@ static NSString *const AccessTokenObjectKey = @"access_token_object";
 - (BOOL)isAuthTokenPresent
 {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  return [userDefaults objectForKey:AuthTokenKey] != NULL;
+  return [userDefaults objectForKey:AuthTokenKey] != nil;
 }
 
 - (void)extractOauthToken:(NSString *)accessToken

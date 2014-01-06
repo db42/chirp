@@ -11,6 +11,7 @@
 #import "Tweet.h"
 #import "User.h"
 #import "TweetViewController.h"
+#import "UIImageView+Addition.h"
 
 static NSString *const IndividualTweetVCSegueId = @"individualTweet";
 
@@ -50,15 +51,7 @@ static NSString *const IndividualTweetVCSegueId = @"individualTweet";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tweet row"];
     
     Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSURL *url = [NSURL URLWithString:tweet.composer.profileImageUrl];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    
-    UIImage *image = [UIImage imageWithData:data];
-    if (image)
-    {
-        cell.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-        cell.imageView.image = image;
-    }
+    [cell.imageView loadImageFromURI:tweet.composer.profileImageUrl];
     cell.textLabel.text = tweet.composer.name;
     cell.detailTextLabel.text = tweet.text;
     cell.detailTextLabel.numberOfLines = 0;

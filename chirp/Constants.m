@@ -11,4 +11,5 @@
 @implementation Constants
 NSString *const AuthTokenKey = @"oauth_token";
 NSString *const AuthTokenSecretKey = @"oauth_token_secret";
+NSString *const SignedInUserScreenNameKey = @"signedin_user_screen_name";
 @end

@@ -8,16 +8,18 @@
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="followersCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendsCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="idString" attributeType="String" syncable="YES"/>
+        <attribute name="idString" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="profileBackgroundImageUrl" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" attributeType="String" syncable="YES"/>
         <attribute name="screenName" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="statusesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="composer" inverseEntity="Tweet" syncable="YES"/>
+        <relationship name="followers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="User" inverseName="followers" inverseEntity="User" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Tweet" inverseName="composer" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Tweet" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Tweet" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="User" positionX="225" positionY="-135" width="128" height="208"/>
     </elements>
 </model>
